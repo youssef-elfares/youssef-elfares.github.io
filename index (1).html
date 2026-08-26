@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Youssef EL FARES · Systèmes embarqués · BUT GEII ESE</title>
+<meta name="description" content="Portfolio de soutenance BUT GEII spécialité Électronique et Systèmes Embarqués. FPGA Cyclone V, vision embarquée, C++, VHDL, terrain CFO/CFA.">
+
+<!--
+  ============================================================
+  PORTFOLIO DE SOUTENANCE · Youssef EL FARES
+  Fichier unique : HTML + CSS + JS. Aucune dépendance externe
+  hors Google Fonts (le site reste lisible sans connexion).
+
+  POUR AJOUTER VOS PHOTOS :
+  chaque emplacement image est un bloc <figure class="ph">.
+  Remplacez le <div class="ph-box">...</div> par :
+      <img src="img/ma-photo.jpg" alt="Description">
+  et gardez le <figcaption>. Le style (coins arrondis, ombre,
+  bordure) s'applique automatiquement.
+
+  RACCOURCIS CLAVIER :
+  Z S Q D + Espace  : pilotage du HUD en page d'accueil
+  C                 : ouvre la matrice des compétences
+  Échap             : ferme la fenêtre ouverte
+  ============================================================
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+/* ============ 1. JETONS DE STYLE ============ */
+:root{
+  --nuit:#0A192F;
+  --nuit-2:#071327;
+  --surface:#112240;
+  --surface-hi:#16305C;
+  --texte:#CCD6F6;
+  --muted:#8892B0;
+  --cyan:#64FFDA;
+  --ambre:#FFB86B;
+  --rouge:#FF5C6C;
+  --indigo:#6C63FF;
+  --ligne:rgba(100,255,218,.16);
+  --ligne-douce:rgba(204,214,246,.10);
+  --display:'Space Grotesk','Segoe UI',system-ui,sans-serif;
+  --corps:'Inter','Segoe UI',system-ui,sans-serif;
+  --mono:'JetBrains Mono','Consolas','Courier New',monospace;
+  --r:14px;
+  --nav-h:64px;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-h) + 16px);-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--nuit);
+  color:var(--texte);
+  font-family:var(--corps);
+  font-size:16px;
+  line-height:1.65;
+  overflow-x:hidden;
+}
+body.bloque{overflow:hidden}
+img{max-width:100%;display:block}
+a{color:var(--cyan);text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:4px}
+
+.wrap{width:min(1180px,92vw);margin-inline:auto}
+.section{padding:clamp(64px,8vw,112px) 0;position:relative}
+.section.alt{background:var(--nuit-2)}
+.section.alt::before,.section.alt::after{
+  content:"";position:absolute;left:0;right:0;height:1px;background:var(--ligne-douce)
+}
+.section.alt::before{top:0}
+.section.alt::after{bottom:0}
+
+/* ============ 2. TYPOGRAPHIE ============ */
+h1,h2,h3,h4{font-family:var(--display);font-weight:700;line-height:1.1;margin:0}
+h1{font-size:clamp(2.6rem,7vw,4.6rem);letter-spacing:-.03em}
+h2{font-size:clamp(1.75rem,3.6vw,2.6rem);letter-spacing:-.02em}
+h3{font-size:1.18rem;letter-spacing:-.01em}
+p{margin:0 0 1rem}
+.lead{font-size:clamp(1.02rem,1.6vw,1.22rem);color:var(--texte);max-width:62ch}
+.muted{color:var(--muted)}
+
+.eyebrow{
+  font-family:var(--mono);font-size:.72rem;font-weight:600;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--cyan);display:flex;align-items:center;gap:12px;
+  margin-bottom:14px;flex-wrap:wrap
+}
+.eyebrow .trait{height:1px;width:56px;background:var(--ligne);flex:none}
+.eyebrow .budget{
+  color:var(--muted);border:1px solid var(--ligne-douce);border-radius:999px;
+  padding:2px 9px;letter-spacing:.08em
+}
+.tete{margin-bottom:clamp(32px,4vw,52px);max-width:70ch}
+
+/* ============ 3. NAVIGATION ============ */
+.nav{
+  position:fixed;inset:0 0 auto 0;height:var(--nav-h);z-index:60;
+  background:rgba(10,25,47,.82);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--ligne-douce);
+  display:flex;align-items:center
+}
+.nav .wrap{display:flex;align-items:center;gap:20px;width:min(1180px,94vw)}
+.marque{font-family:var(--mono);font-size:.84rem;font-weight:600;letter-spacing:.04em;color:var(--texte);white-space:nowrap}
+.marque b{color:var(--cyan);font-weight:600}
+.nav-liens{display:flex;gap:6px;margin-left:auto;align-items:center}
+.nav-liens a{
+  font-family:var(--mono);font-size:.76rem;color:var(--muted);padding:8px 11px;border-radius:8px;
+  transition:color .2s,background .2s;white-space:nowrap
+}
+.nav-liens a:hover{color:var(--cyan);background:rgba(100,255,218,.07)}
+.nav-liens a.actif{color:var(--cyan)}
+.nav-liens a .num{opacity:.55;margin-right:5px}
+.chrono{
+  display:flex;align-items:center;gap:2px;margin-left:8px;
+  border:1px solid var(--ligne);border-radius:999px;padding:3px 4px 3px 12px;flex:none
+}
+.chrono output{font-family:var(--mono);font-size:.8rem;font-weight:600;color:var(--cyan);min-width:44px;text-align:center}
+.chrono.court output{color:var(--ambre)}
+.chrono.fin output{color:var(--rouge)}
+.chrono button{
+  width:28px;height:28px;border-radius:50%;display:grid;place-items:center;color:var(--muted);
+  transition:color .2s,background .2s
+}
+.chrono button:hover{color:var(--cyan);background:rgba(100,255,218,.1)}
+.chrono svg{width:13px;height:13px;fill:currentColor}
+.burger{display:none;margin-left:auto;width:40px;height:40px;border-radius:10px;color:var(--cyan)}
+.burger svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8}
+
+/* ============ 4. ACCUEIL ============ */
+.hero{padding-top:calc(var(--nav-h) + clamp(36px,6vw,72px));padding-bottom:clamp(48px,6vw,88px);position:relative;overflow:hidden}
+.hero::after{
+  content:"";position:absolute;top:-30%;right:-10%;width:60vw;height:60vw;pointer-events:none;
+  background:radial-gradient(circle,rgba(108,99,255,.16),transparent 62%);z-index:0
+}
+.hero .wrap{position:relative;z-index:1}
+.hero-grille{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.04fr);gap:clamp(28px,4vw,56px);align-items:center}
+.hero h1{margin:6px 0 4px}
+.hero .role{
+  font-family:var(--display);font-weight:500;font-size:clamp(1.05rem,2.2vw,1.4rem);
+  color:var(--muted);margin-bottom:18px
+}
+.hero .role b{color:var(--texte);font-weight:500}
+.puces{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 26px;padding:0;list-style:none}
+.puces li{
+  font-family:var(--mono);font-size:.73rem;color:var(--texte);
+  border:1px solid var(--ligne-douce);border-radius:999px;padding:6px 13px;background:rgba(17,34,64,.5)
+}
+.puces li::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--cyan);margin-right:8px;vertical-align:1px}
+.puces li.terrain::before{background:var(--ambre)}
+.actions{display:flex;flex-wrap:wrap;gap:12px}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:.82rem;
+  padding:13px 22px;border-radius:10px;border:1px solid var(--cyan);color:var(--cyan);
+  transition:background .2s,transform .2s,box-shadow .2s
+}
+.btn:hover{background:rgba(100,255,218,.09);transform:translateY(-2px);box-shadow:0 10px 24px -14px var(--cyan)}
+.btn.plein{background:var(--cyan);color:#06253f;font-weight:600}
+.btn.plein:hover{background:#7dffe4;box-shadow:0 14px 30px -14px var(--cyan)}
+.btn svg{width:15px;height:15px;fill:currentColor}
+
+/* ---- HUD signature ---- */
+.hud-bloc{position:relative}
+.hud-cadre{
+  border:1px solid var(--ligne);border-radius:var(--r);overflow:hidden;
+  background:#0c1526;box-shadow:0 30px 60px -30px rgba(0,0,0,.9),0 0 0 1px rgba(255,255,255,.02) inset
+}
+.hud-barre{
+  display:flex;align-items:center;gap:8px;padding:9px 13px;border-bottom:1px solid var(--ligne-douce);
+  font-family:var(--mono);font-size:.68rem;color:var(--muted);letter-spacing:.06em;background:rgba(17,34,64,.75)
+}
+.led{width:8px;height:8px;border-radius:50%;background:var(--cyan);flex:none;box-shadow:0 0 8px var(--cyan)}
+.hud-barre .droite{margin-left:auto;color:var(--cyan)}
+#hud{display:block;width:100%;height:auto;aspect-ratio:16/10;background:#161b22;touch-action:manipulation}
+.hud-pied{
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:11px 13px;
+  border-top:1px solid var(--ligne-douce);background:rgba(17,34,64,.75)
+}
+.hud-pied .form{font-family:var(--mono);font-size:.7rem;color:var(--muted)}
+.hud-pied .form b{color:var(--cyan);font-weight:400}
+.hud-slider{display:flex;align-items:center;gap:9px;margin-left:auto;font-family:var(--mono);font-size:.68rem;color:var(--muted)}
+input[type=range]{
+  -webkit-appearance:none;appearance:none;width:132px;height:3px;border-radius:2px;
+  background:linear-gradient(90deg,var(--ambre),var(--cyan));outline-offset:6px
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:15px;height:15px;border-radius:50%;background:var(--texte);
+  border:2px solid var(--nuit);cursor:pointer
+}
+input[type=range]::-moz-range-thumb{width:15px;height:15px;border-radius:50%;background:var(--texte);border:2px solid var(--nuit);cursor:pointer}
+.touches{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap;justify-content:center}
+.touche{
+  font-family:var(--mono);font-size:.72rem;color:var(--muted);border:1px solid var(--ligne-douce);
+  border-radius:8px;padding:7px 12px;min-width:40px;text-align:center;transition:.15s;user-select:none
+}
+.touche.on{color:var(--nuit);background:var(--cyan);border-color:var(--cyan)}
+.hud-note{font-family:var(--mono);font-size:.68rem;color:var(--muted);text-align:center;margin-top:10px}
+
+/* ============ 5. SAVOIR FAIRE ============ */
+.grille-savoir{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:18px}
+.carte{
+  background:var(--surface);border:1px solid var(--ligne-douce);border-radius:var(--r);
+  padding:24px 22px;transition:border-color .25s,transform .25s
+}
+.carte:hover{border-color:var(--ligne)}
+.carte h3{margin-bottom:4px}
+.carte .st{font-family:var(--mono);font-size:.68rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:18px}
+.skill{margin-bottom:15px}
+.skill:last-child{margin-bottom:0}
+.skill .haut{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:6px}
+.skill .nom{font-size:.92rem}
+.skill .niv{font-family:var(--mono);font-size:.64rem;color:var(--muted);letter-spacing:.06em;white-space:nowrap}
+.bargraph{display:flex;gap:3px}
+.bargraph i{
+  flex:1;height:6px;border-radius:1px;background:rgba(204,214,246,.12);
+  transform:scaleY(.5);transform-origin:bottom;transition:transform .5s cubic-bezier(.2,.8,.3,1),background .5s
+}
+.vu .bargraph i.plein{transform:scaleY(1);background:var(--cyan)}
+.vu .bargraph i.plein.amb{background:var(--ambre)}
+.habilit{
+  margin-top:22px;display:flex;flex-wrap:wrap;gap:8px
+}
+.tag{
+  font-family:var(--mono);font-size:.7rem;color:var(--muted);border:1px solid var(--ligne-douce);
+  border-radius:6px;padding:5px 10px;background:rgba(10,25,47,.5)
+}
+.tag.cy{color:var(--cyan);border-color:var(--ligne)}
+.tag.am{color:var(--ambre);border-color:rgba(255,184,107,.28)}
+
+/* ============ 6. PROJETS ============ */
+.filtres{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px}
+.filtre{
+  font-family:var(--mono);font-size:.74rem;color:var(--muted);border:1px solid var(--ligne-douce);
+  border-radius:999px;padding:7px 15px;transition:.2s
+}
+.filtre:hover{color:var(--texte);border-color:var(--ligne)}
+.filtre.actif{color:var(--nuit);background:var(--cyan);border-color:var(--cyan);font-weight:600}
+.grille-projets{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:18px}
+.projet{
+  position:relative;text-align:left;width:100%;background:var(--surface);
+  border:1px solid var(--ligne-douce);border-radius:var(--r);padding:24px 22px 20px;
+  transform-style:preserve-3d;transition:box-shadow .3s,border-color .3s,opacity .3s;
+  display:flex;flex-direction:column;gap:12px;min-height:236px
+}
+.projet:hover{border-color:var(--ligne);box-shadow:0 26px 46px -28px rgba(2,12,27,1),0 0 30px -20px var(--cyan)}
+.projet.masque{display:none}
+.projet .rang{
+  display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:.68rem;color:var(--muted)
+}
+.projet .rang .annee{margin-left:auto}
+.projet .ic{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;background:rgba(100,255,218,.09);color:var(--cyan);flex:none}
+.projet .ic svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.projet.terrain .ic{background:rgba(255,184,107,.1);color:var(--ambre)}
+.projet h3{margin-bottom:2px}
+.projet .desc{font-size:.9rem;color:var(--muted);margin:0}
+.projet .mots{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+.projet .mots span{font-family:var(--mono);font-size:.66rem;color:var(--muted);background:rgba(10,25,47,.65);border-radius:5px;padding:4px 8px}
+.projet .ouvrir{font-family:var(--mono);font-size:.7rem;color:var(--cyan);display:flex;align-items:center;gap:7px}
+.projet .ouvrir svg{width:12px;height:12px;fill:currentColor;transition:transform .25s}
+.projet:hover .ouvrir svg{transform:translateX(4px)}
+.maitrise{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.66rem;color:var(--muted)}
+.maitrise i{width:16px;height:4px;border-radius:1px;background:rgba(204,214,246,.16)}
+.maitrise i.on{background:var(--cyan)}
+.projet.terrain .maitrise i.on{background:var(--ambre)}
+
+/* ============ 7. TERRAIN ============ */
+.frise{position:relative;padding-left:30px}
+.frise::before{content:"";position:absolute;left:6px;top:8px;bottom:8px;width:1px;background:linear-gradient(180deg,var(--ambre),var(--ligne-douce))}
+.etape{position:relative;padding-bottom:34px}
+.etape:last-child{padding-bottom:0}
+.etape::before{
+  content:"";position:absolute;left:-27px;top:7px;width:11px;height:11px;border-radius:50%;
+  background:var(--nuit);border:2px solid var(--ambre)
+}
+.etape.sec::before{border-color:var(--muted)}
+.etape .quand{font-family:var(--mono);font-size:.7rem;color:var(--ambre);letter-spacing:.06em}
+.etape.sec .quand{color:var(--muted)}
+.etape h3{margin:5px 0 2px}
+.etape .ou{font-size:.88rem;color:var(--muted);margin-bottom:12px}
+.etape ul{margin:0;padding-left:18px}
+.etape li{margin-bottom:7px;font-size:.94rem}
+.etape li::marker{color:var(--ambre)}
+.encadre{
+  border-left:2px solid var(--ambre);background:rgba(255,184,107,.06);border-radius:0 10px 10px 0;
+  padding:16px 18px;margin:14px 0 4px
+}
+.encadre .t{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ambre);margin-bottom:7px}
+.encadre p{margin:0;font-size:.93rem}
+
+/* ============ 8. BANDEAU COMPETENCES ============ */
+.bandeau{
+  border:1px solid var(--ligne);border-radius:18px;background:
+    linear-gradient(135deg,rgba(100,255,218,.07),rgba(108,99,255,.09));
+  padding:clamp(28px,4vw,46px);display:grid;grid-template-columns:minmax(0,1fr) auto;
+  gap:26px;align-items:center
+}
+.bandeau .quatre{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.bandeau .quatre span{
+  font-family:var(--mono);font-size:.72rem;color:var(--texte);border:1px solid var(--ligne);
+  border-radius:8px;padding:7px 13px;background:rgba(10,25,47,.45)
+}
+
+/* ============ 9. CONTACT ============ */
+.contact{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;margin-top:30px}
+.contact a,.contact div{
+  background:var(--surface);border:1px solid var(--ligne-douce);border-radius:var(--r);padding:20px;
+  transition:border-color .25s,transform .25s
+}
+.contact a:hover{border-color:var(--ligne);transform:translateY(-3px)}
+.contact .lb{font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px}
+.contact .vl{color:var(--texte);font-size:.98rem;word-break:break-word}
+footer{border-top:1px solid var(--ligne-douce);padding:26px 0 34px;text-align:center}
+footer p{font-family:var(--mono);font-size:.7rem;color:var(--muted);margin:0}
+footer kbd{
+  font-family:var(--mono);font-size:.68rem;border:1px solid var(--ligne-douce);border-radius:4px;
+  padding:1px 6px;color:var(--texte)
+}
+
+/* ============ 10. FENETRES ============ */
+.voile{
+  position:fixed;inset:0;z-index:80;background:rgba(4,10,22,.86);backdrop-filter:blur(6px);
+  display:none;padding:24px;overflow-y:auto;overscroll-behavior:contain
+}
+.voile.ouvert{display:block}
+.fiche{
+  width:min(880px,100%);margin:clamp(12px,5vh,60px) auto;background:var(--surface);
+  border:1px solid var(--ligne);border-radius:18px;padding:clamp(24px,4vw,44px);
+  animation:monte .35s cubic-bezier(.2,.8,.3,1)
+}
+@keyframes monte{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+.fiche-tete{display:flex;align-items:flex-start;gap:16px;margin-bottom:8px}
+.fiche-tete .ic svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.fiche-tete h3{font-size:clamp(1.4rem,3vw,2rem)}
+.fermer{
+  margin-left:auto;width:38px;height:38px;border-radius:10px;border:1px solid var(--ligne-douce);
+  display:grid;place-items:center;color:var(--muted);flex:none;transition:.2s
+}
+.fermer:hover{color:var(--rouge);border-color:var(--rouge)}
+.fermer svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round}
+.fiche h4{
+  font-family:var(--mono);font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--cyan);margin:30px 0 12px
+}
+.fiche ul{padding-left:18px;margin:0 0 4px}
+.fiche li{margin-bottom:8px;font-size:.96rem}
+.fiche li::marker{color:var(--cyan)}
+.chiffres{display:grid;grid-template-columns:repeat(auto-fit,minmax(128px,1fr));gap:12px;margin:6px 0 4px}
+.chiffre{background:rgba(10,25,47,.6);border:1px solid var(--ligne-douce);border-radius:11px;padding:15px}
+.chiffre b{display:block;font-family:var(--display);font-size:1.55rem;color:var(--cyan);line-height:1.1}
+.chiffre span{font-family:var(--mono);font-size:.64rem;color:var(--muted);letter-spacing:.05em}
+pre{
+  background:#0b1830;border:1px solid var(--ligne-douce);border-left:2px solid var(--cyan);
+  border-radius:0 10px 10px 0;padding:16px 18px;overflow-x:auto;margin:0
+}
+code{font-family:var(--mono);font-size:.79rem;color:#a8c4ea;line-height:1.75}
+code .kw{color:var(--cyan)}
+code .cm{color:#5c7099;font-style:italic}
+code .nb{color:var(--ambre)}
+table.mat{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:.76rem;margin:4px 0}
+table.mat th,table.mat td{border:1px solid var(--ligne-douce);padding:9px 11px;text-align:center}
+table.mat th{color:var(--muted);font-weight:400;letter-spacing:.05em}
+table.mat td.diag{color:var(--cyan);background:rgba(100,255,218,.07)}
+table.mat td.err{color:var(--rouge)}
+.ph{margin:0}
+.ph-box{
+  border:1px dashed var(--ligne-douce);border-radius:11px;aspect-ratio:16/9;display:grid;place-items:center;
+  background:rgba(10,25,47,.55);padding:16px;text-align:center
+}
+.ph-box span{font-family:var(--mono);font-size:.7rem;color:var(--muted)}
+.ph img{border-radius:11px;box-shadow:0 20px 40px -24px rgba(0,0,0,.95);border:1px solid var(--ligne-douce)}
+.ph figcaption{font-family:var(--mono);font-size:.68rem;color:var(--muted);margin-top:9px}
+.duo{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+
+/* ---- diagramme SoC ---- */
+.soc{width:100%;height:auto;border:1px solid var(--ligne-douce);border-radius:11px;background:rgba(10,25,47,.55)}
+.soc .bloc{fill:rgba(17,34,64,.9);stroke:var(--ligne-douce)}
+.soc .txt{font-family:var(--mono);font-size:9px;fill:var(--texte)}
+.soc .txt.pt{font-size:7.5px;fill:var(--muted)}
+.soc .fil{stroke:var(--ligne-douce);stroke-width:1;fill:none}
+.soc .paquet{fill:var(--cyan)}
+@keyframes flux{from{transform:translateX(0)}to{transform:translateX(74px)}}
+@keyframes flux2{from{transform:translateX(0)}to{transform:translateX(86px)}}
+.soc .p1{animation:flux 1.5s linear infinite}
+.soc .p2{animation:flux 1.5s linear infinite .5s}
+.soc .p3{animation:flux2 1.8s linear infinite}
+
+/* ---- matrice des competences, page isolee ---- */
+.page-comp{
+  position:fixed;inset:0;z-index:90;background:var(--nuit);display:none;overflow-y:auto;
+  overscroll-behavior:contain
+}
+.page-comp.ouvert{display:block;animation:fondu .3s ease}
+@keyframes fondu{from{opacity:0}to{opacity:1}}
+.comp-tete{
+  position:sticky;top:0;z-index:2;background:rgba(10,25,47,.94);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--ligne);padding:16px 0
+}
+.comp-tete .wrap{display:flex;align-items:center;gap:16px}
+.comp-tete .lb{font-family:var(--mono);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan)}
+.comp-tete h2{font-size:clamp(1.2rem,2.6vw,1.7rem);margin-top:2px}
+.comp-corps{padding:clamp(30px,5vw,58px) 0 90px}
+.comp-intro{max-width:70ch;margin-bottom:34px}
+.grille-comp{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:18px}
+.comp{
+  background:var(--surface);border:1px solid var(--ligne-douce);border-radius:16px;padding:26px 24px;
+  display:flex;flex-direction:column
+}
+.comp .code{font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;color:var(--muted)}
+.comp h3{font-size:1.5rem;margin:4px 0 3px;color:var(--cyan)}
+.comp.am h3{color:var(--ambre)}
+.comp .verbe{font-size:.88rem;color:var(--muted);margin-bottom:18px;min-height:2.6em}
+.preuve{border-top:1px solid var(--ligne-douce);padding-top:14px;margin-top:14px}
+.preuve:first-of-type{border-top:0;padding-top:0;margin-top:0}
+.preuve .qui{font-family:var(--mono);font-size:.66rem;color:var(--muted);letter-spacing:.06em;margin-bottom:5px}
+.preuve p{font-size:.93rem;margin:0}
+.comp .app{margin-top:auto;padding-top:18px}
+.comp .app div{font-family:var(--mono);font-size:.7rem;color:var(--muted);padding-left:16px;position:relative;margin-bottom:6px}
+.comp .app div::before{content:"+";position:absolute;left:0;color:var(--cyan)}
+.comp.am .app div::before{color:var(--ambre)}
+
+/* ============ 11. ANIMATIONS ============ */
+[data-reveal]{opacity:1;transform:none}
+.js [data-reveal]{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.3,1),transform .7s cubic-bezier(.2,.7,.3,1)}
+[data-reveal].vu{opacity:1;transform:none}
+.projet.vu{transition:box-shadow .3s,border-color .3s,transform .2s ease-out}
+.saut{position:absolute;left:-9999px;top:0;background:var(--cyan);color:var(--nuit);padding:10px 16px;border-radius:8px;z-index:100}
+.saut:focus{left:16px;top:12px}
+
+/* ============ 12. RESPONSIVE ============ */
+@media (max-width:960px){
+  .hero-grille{grid-template-columns:1fr;gap:34px}
+  .bandeau{grid-template-columns:1fr}
+}
+@media (max-width:780px){
+  .nav-liens{
+    position:fixed;top:var(--nav-h);left:0;right:0;flex-direction:column;align-items:stretch;
+    background:rgba(7,19,39,.98);border-bottom:1px solid var(--ligne);padding:10px 5vw 18px;
+    gap:2px;display:none;margin-left:0
+  }
+  .nav-liens.ouvert{display:flex}
+  .nav-liens a{padding:12px 8px;font-size:.85rem}
+  .burger{display:grid;place-items:center}
+  .chrono{order:1;margin-left:auto}
+  .burger{order:2;margin-left:0}
+  .marque .long{display:none}
+}
+@media (max-width:520px){
+  .fiche{padding:22px 18px;border-radius:14px}
+  .chiffres{grid-template-columns:repeat(2,1fr)}
+  .hud-slider{width:100%;margin-left:0}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
+  [data-reveal]{opacity:1;transform:none}
+}
+@media print{
+  .nav,.hero,.section,footer,.voile{display:none !important}
+  .page-comp{position:static;display:block;background:#fff}
+  .page-comp .fermer{display:none}
+  .comp-tete{position:static;background:none;border-color:#ccc}
+  .comp-tete .lb,.comp-tete h2{color:#111}
+  body{background:#fff;color:#111}
+  .comp{border:1px solid #ccc;break-inside:avoid;background:#fff}
+  .comp h3{color:#111}
+}
+</style>
+</head>
+<body>
+
+<script>document.documentElement.classList.add('js');</script>
+
+<a class="saut" href="#projets">Aller aux projets</a>
+
+<!-- ======================= NAVIGATION ======================= -->
+<nav class="nav">
+  <div class="wrap">
+    <span class="marque">EL FARES <b>Youssef</b><span class="long"> · GEII ESE</span></span>
+    <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <div class="nav-liens" id="menu">
+      <a href="#savoir-faire"><span class="num">01</span>Bilan</a>
+      <a href="#projets"><span class="num">02</span>Projets</a>
+      <a href="#terrain"><span class="num">03</span>Terrain</a>
+      <a href="#competences"><span class="num">04</span>Compétences</a>
+      <a href="#contact"><span class="num">05</span>Contact</a>
+    </div>
+    <div class="chrono" id="chrono">
+      <output id="montre" aria-live="off">05:00</output>
+      <button id="go" aria-label="Démarrer le chronomètre de soutenance">
+        <svg viewBox="0 0 16 16" id="ico-go"><path d="M4 2.5v11l9-5.5z"/></svg>
+      </button>
+      <button id="raz" aria-label="Remettre le chronomètre à 5 minutes">
+        <svg viewBox="0 0 16 16"><path d="M8 2a6 6 0 1 0 5.7 4.1l-1.5.5A4.4 4.4 0 1 1 8 3.6V6l3.5-2.7L8 .5z"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+<!-- ======================= 00 · ACCUEIL ======================= -->
+<section class="hero" id="accueil">
+  <div class="wrap">
+    <div class="hero-grille">
+
+      <div data-reveal>
+        <div class="eyebrow"><span class="trait"></span>BUT GEII · Électronique et Systèmes Embarqués</div>
+        <h1>Youssef<br>EL FARES</h1>
+        <p class="role">Du <b>VHDL sur FPGA</b> au <b>câblage 400 V en exploitation</b>, je conçois, j'implante et je dépanne des systèmes embarqués.</p>
+        <ul class="puces">
+          <li>Admis au cycle ingénieur ISTP, Mines Saint-Étienne</li>
+          <li>Alternance dès le 28 septembre 2026</li>
+          <li class="terrain">Habilitations B0, B1, B1V</li>
+        </ul>
+        <div class="actions">
+          <a class="btn plein" href="#projets">
+            <svg viewBox="0 0 16 16"><path d="M2 3h12v2H2zm0 4h12v2H2zm0 4h8v2H2z"/></svg>
+            Voir les projets
+          </a>
+          <button class="btn" data-comp>
+            <svg viewBox="0 0 16 16"><path d="M2 2h5v5H2zm7 0h5v5H9zM2 9h5v5H2zm7 0h5v5H9z"/></svg>
+            Matrice des compétences
+          </button>
+        </div>
+      </div>
+
+      <div class="hud-bloc" data-reveal style="--d:.12s">
+        <div class="hud-cadre">
+          <div class="hud-barre">
+            <span class="led"></span>
+            <span>CAMERA DE RECUL · RASPBERRY PI 4 · TCP/IP</span>
+            <span class="droite" id="hud-etat">LIVE</span>
+          </div>
+          <canvas id="hud" width="800" height="500" tabindex="0"
+                  aria-label="Simulation interactive du HUD de recul, pilotable au clavier"></canvas>
+          <div class="hud-pied">
+            <span class="form">B(t) = (1-t)<b>²</b>P0 + 2(1-t)t P1 + t<b>²</b>P2</span>
+            <label class="hud-slider">BRAQUAGE
+              <input type="range" id="braquage" min="-100" max="100" value="0" aria-label="Angle de braquage">
+            </label>
+          </div>
+        </div>
+        <div class="touches" aria-hidden="true">
+          <span class="touche" data-k="z">Z avance</span>
+          <span class="touche" data-k="s">S recule</span>
+          <span class="touche" data-k="q">Q gauche</span>
+          <span class="touche" data-k="d">D droite</span>
+          <span class="touche" data-k=" ">Espace stop</span>
+        </div>
+        <p class="hud-note">Le HUD de mon projet, rejoué dans le navigateur. Les guides sont de vraies courbes de Bézier quadratiques recalculées à chaque image.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 01 · BILAN ======================= -->
+<section class="section alt" id="savoir-faire">
+  <div class="wrap">
+    <div class="tete" data-reveal>
+      <div class="eyebrow"><span class="trait"></span>Étape 01 · Bilan <span class="budget">45 s</span></div>
+      <h2>Qu'est-ce que je sais faire</h2>
+      <p class="lead muted">Trois familles d'outils que j'utilise moi même sur des cartes réelles, pas seulement en cours. Le niveau annoncé correspond à ce que je peux refaire seul, aujourd'hui, sans documentation externe.</p>
+    </div>
+
+    <div class="grille-savoir">
+      <div class="carte" data-reveal style="--d:.05s">
+        <h3>Langages</h3>
+        <p class="st">Code embarqué et logique</p>
+        <div class="skill"><div class="haut"><span class="nom">C++</span><span class="niv">AUTONOME</span></div><div class="bargraph" data-n="9"></div></div>
+        <div class="skill"><div class="haut"><span class="nom">VHDL</span><span class="niv">AUTONOME</span></div><div class="bargraph" data-n="8"></div></div>
+        <div class="skill"><div class="haut"><span class="nom">Python</span><span class="niv">OPÉRATIONNEL</span></div><div class="bargraph" data-n="7"></div></div>
+        <div class="skill"><div class="haut"><span class="nom">Arduino / C</span><span class="niv">AUTONOME</span></div><div class="bargraph" data-n="8"></div></div>
+        <div class="skill"><div class="haut"><span class="nom">LADDER</span><span class="niv">OPÉRATIONNEL</span></div><div class="bargraph" data-n="6"></div></div>
+      </div>
+
+      <div class="carte" data-reveal style="--d:.12s">
+        <h3>Électronique et FPGA</h3>
+        <p class="st">Conception, routage, intégration</p>
+        <div class="skill"><div class="haut"><span class="nom">KiCad et Eagle</span><span class="niv">AUTONOME</span></div><div class="bargraph" data-n="8"></div></div>
+        <div class="skill"><div class="haut"><span class="nom">Quartus Prime, Platform Designer</span><span class="niv">OPÉRATIONNEL</span></div><div class="bargraph" data-n="7"></div></div>
+        <div class="skill"><div class="haut"><span class="nom">Bus I2C et signaux TOR</span><span class="niv">AUTONOME</span></div><div class="bargraph" data-n="8"></div></div>
+        <div class="skill"><div class="haut"><span class="nom">TCP/IP et réseau local</span><span class="niv">OPÉRATIONNEL</span></div><div class="bargraph" data-n="7"></div></div>
+        <div class="skill"><div class="haut"><span class="nom">Mesure, oscilloscope, thermique</span><span class="niv">AUTONOME</span></div><div class="bargraph" data-n="8"></div></div>
+      </div>
+
+      <div class="carte" data-reveal style="--d:.19s">
+        <h3>Systèmes et matériel</h3>
+        <p class="st">Cibles que j'ai fait tourner</p>
+        <div class="skill"><div class="haut"><span class="nom">SoC Cyclone V, DE10-Nano</span><span class="niv">OPÉRATIONNEL</span></div><div class="bargraph" data-n="7"></div></div>
+        <div class="skill"><div class="haut"><span class="nom">Raspberry Pi 4 et Pico</span><span class="niv">AUTONOME</span></div><div class="bargraph" data-n="9"></div></div>
+        <div class="skill"><div class="haut"><span class="nom">Linux embarqué, U-Boot</span><span class="niv">OPÉRATIONNEL</span></div><div class="bargraph" data-n="7"></div></div>
+        <div class="skill"><div class="haut"><span class="nom">Qt Creator, OpenCV</span><span class="niv">OPÉRATIONNEL</span></div><div class="bargraph" data-n="7"></div></div>
+        <div class="skill"><div class="haut"><span class="nom">YOLOv8, Roboflow</span><span class="niv">OPÉRATIONNEL</span></div><div class="bargraph" data-n="6"></div></div>
+      </div>
+    </div>
+
+    <div class="habilit" data-reveal style="--d:.24s">
+      <span class="tag am">Habilitations B0, B1, B1V</span>
+      <span class="tag am">CFO et CFA</span>
+      <span class="tag am">Boucle SSI</span>
+      <span class="tag am">CACES</span>
+      <span class="tag cy">Anglais B2 / C1</span>
+      <span class="tag cy">Permis B</span>
+      <span class="tag">Jeedom, Zigbee</span>
+      <span class="tag">Packet Tracer</span>
+      <span class="tag">MQTT</span>
+      <span class="tag">Régulation PID</span>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 02 · PROJETS ======================= -->
+<section class="section" id="projets">
+  <div class="wrap">
+    <div class="tete" data-reveal>
+      <div class="eyebrow"><span class="trait"></span>Étape 02 · Projets et manips <span class="budget">2 min</span></div>
+      <h2>Ce que j'ai construit</h2>
+      <p class="lead muted">Sept réalisations, de la carte pastillée soudée au maître DMA en VHDL. Ouvrez une carte pour voir le détail technique, les chiffres de validation et le code.</p>
+    </div>
+
+    <div class="filtres" data-reveal role="group" aria-label="Filtrer les projets">
+      <button class="filtre actif" data-f="tous">Tous</button>
+      <button class="filtre" data-f="ia">Vision et IA</button>
+      <button class="filtre" data-f="fpga">FPGA et VHDL</button>
+      <button class="filtre" data-f="carte">Électronique</button>
+      <button class="filtre" data-f="asserv">Asservissement</button>
+    </div>
+
+    <div class="grille-projets" id="grille-projets"></div>
+  </div>
+</section>
+
+<!-- ======================= 03 · TERRAIN ======================= -->
+<section class="section alt" id="terrain">
+  <div class="wrap">
+    <div class="tete" data-reveal>
+      <div class="eyebrow"><span class="trait"></span>Étape 03 · Expérience terrain <span class="budget">1 min</span></div>
+      <h2>Le chantier, pas seulement le labo</h2>
+      <p class="lead muted">Ce qui distingue mon profil : je passe du code au tableau électrique. Quatorze semaines sur un site aéroportuaire en exploitation, avec les contraintes de sécurité qui vont avec.</p>
+    </div>
+
+    <div class="frise" data-reveal style="--d:.08s">
+
+      <article class="etape">
+        <div class="quand">14 semaines · Mars à juin 2026</div>
+        <h3>Électricien, stage BUT3</h3>
+        <p class="ou">CEGRI SAS · Chantier Aéroports de Paris, Orly</p>
+        <ul>
+          <li>Installations courants forts et courants faibles : chemins de câbles, tirage, raccordement d'armoires, repérage et essais de continuité.</li>
+          <li>Mise en service d'aérothermes 15 kW : contrôle des protections, mesures sous tension avec habilitation B1V.</li>
+          <li>Dépannage d'une boucle de sécurité incendie : recherche de défaut sur la boucle SSI, contrôle des adressages et remise en service.</li>
+          <li>Travail en site occupé : autorisations d'accès, plan de prévention, coactivité avec les autres corps d'état.</li>
+        </ul>
+        <div class="encadre">
+          <div class="t">Le diagnostic dont je suis le plus fier</div>
+          <p>Un aérotherme refusait de démarrer et faisait déclencher la protection. En reprenant le schéma bornier par bornier, j'ai trouvé une inversion entre le circuit de commande 24 V et le circuit de puissance 400 V faite en amont. J'ai consigné, corrigé le câblage, contrôlé l'isolement puis validé le fonctionnement avec le chef d'équipe. Sans ce contrôle, le risque était la destruction du contacteur et un choc électrique à l'intervention suivante.</p>
+        </div>
+      </article>
+
+      <article class="etape sec">
+        <div class="quand">Janvier à mars 2025</div>
+        <h3>Intégration systèmes et réseaux, stage</h3>
+        <p class="ou">MARTECH · Troyes</p>
+        <ul>
+          <li>Déploiement domotique complet : Jeedom, serveur NAS, adressage IP statique, appairage Zigbee.</li>
+          <li>Mise en service de serrures connectées et de terminaux de paiement chez le client, avec recette et formation utilisateur.</li>
+        </ul>
+      </article>
+
+      <article class="etape sec">
+        <div class="quand">Étés 2023, 2024 et 2025</div>
+        <h3>Opérateur de manutention</h3>
+        <p class="ou">Secteur agroalimentaire · Titulaire du CACES</p>
+        <ul>
+          <li>Travail posté en milieu industriel : cadence, conduite d'engins, respect strict des procédures qualité et sécurité.</li>
+        </ul>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 04 · BANDEAU COMPETENCES ======================= -->
+<section class="section" id="competences">
+  <div class="wrap">
+    <div class="bandeau" data-reveal>
+      <div>
+        <div class="eyebrow"><span class="trait"></span>Étape 04 · Diplôme <span class="budget">1 min</span></div>
+        <h2>Matrice des compétences BUT GEII</h2>
+        <p class="lead muted" style="margin-top:14px">Chaque compétence du référentiel est reliée à un acte technique précis, daté et vérifiable. La matrice s'ouvre en page pleine, isolée du reste du portfolio, et s'imprime telle quelle.</p>
+        <div class="quatre">
+          <span>Concevoir</span><span>Vérifier</span><span>Maintenir</span><span>Implanter</span>
+        </div>
+      </div>
+      <button class="btn plein" data-comp>
+        Ouvrir la matrice
+        <svg viewBox="0 0 16 16"><path d="M6 3l5 5-5 5V3z"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 05 · CONTACT ======================= -->
+<section class="section alt" id="contact">
+  <div class="wrap">
+    <div class="tete" data-reveal>
+      <div class="eyebrow"><span class="trait"></span>Étape 05 · Suite <span class="budget">15 s</span></div>
+      <h2>Disponible en alternance</h2>
+      <p class="lead muted">Cycle ingénieur de spécialité électronique à l'ISTP, Mines Saint-Étienne, à partir du 28 septembre 2026. Je cherche une entreprise où l'embarqué se confronte au matériel réel.</p>
+    </div>
+    <div class="contact" data-reveal style="--d:.08s">
+      <a href="mailto:elfares.youssef01@gmail.com"><span class="lb">Courriel</span><span class="vl">elfares.youssef01@gmail.com</span></a>
+      <a href="tel:+33658154146"><span class="lb">Téléphone</span><span class="vl">06 58 15 41 46</span></a>
+      <div><span class="lb">Base</span><span class="vl">13160 Châteaurenard · Permis B</span></div>
+      <div><span class="lb">École</span><span class="vl">ISTP, Mines Saint-Étienne</span></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Portfolio de soutenance BUT GEII ESE · IUT de Troyes, URCA · 2026 · Codé à la main, sans gabarit</p>
+    <p style="margin-top:9px"><kbd>Z</kbd> <kbd>S</kbd> <kbd>Q</kbd> <kbd>D</kbd> pilotent le HUD · <kbd>C</kbd> ouvre la matrice · <kbd>Échap</kbd> ferme</p>
+  </div>
+</footer>
+
+<!-- ======================= FENETRE PROJET ======================= -->
+<div class="voile" id="voile" role="dialog" aria-modal="true" aria-labelledby="fiche-titre">
+  <div class="fiche" id="fiche"></div>
+</div>
+
+<!-- ======================= PAGE MATRICE DES COMPETENCES ======================= -->
+<div class="page-comp" id="page-comp" role="dialog" aria-modal="true" aria-labelledby="comp-titre">
+  <div class="comp-tete">
+    <div class="wrap">
+      <div>
+        <div class="lb">Référentiel BUT GEII · Parcours ESE</div>
+        <h2 id="comp-titre">Matrice des compétences</h2>
+      </div>
+      <button class="fermer" data-ferme aria-label="Fermer la matrice">
+        <svg viewBox="0 0 16 16"><path d="M3 3l10 10M13 3L3 13"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="comp-corps">
+    <div class="wrap">
+      <p class="lead comp-intro">Quatre compétences, huit preuves. Pour chacune : ce que j'ai fait, sur quel matériel, et comment le résultat a été vérifié. Les apprentissages critiques du référentiel sont rappelés en bas de chaque bloc.</p>
+
+      <div class="grille-comp">
+
+        <article class="comp">
+          <span class="code">COMPÉTENCE 01</span>
+          <h3>Concevoir</h3>
+          <p class="verbe">Concevoir la partie matérielle ou logicielle d'un système à partir d'un cahier des charges.</p>
+          <div class="preuve">
+            <div class="qui">Caméra de recul intelligente · 2026</div>
+            <p>Architecture logicielle distribuée en C++ entre une Raspberry Pi 4 embarquée et un PC de contrôle, liaison TCP/IP dédiée pour la vidéo et pour la commande, puis intégration d'un modèle YOLOv8-seg dans la boucle temps réel de la voiture téléopérée.</p>
+          </div>
+          <div class="preuve">
+            <div class="qui">Régulation de température · SAE</div>
+            <p>Découpage fonctionnel complet du système, dimensionnement de chaque fonction par le calcul, puis rédaction du dossier de fabrication permettant de reproduire les sept cartes.</p>
+          </div>
+          <div class="app">
+            <div>Produire une analyse fonctionnelle d'un système</div>
+            <div>Réaliser un prototype de solution technique matérielle</div>
+            <div>Rédiger un dossier de fabrication à partir d'un dossier de conception</div>
+          </div>
+        </article>
+
+        <article class="comp">
+          <span class="code">COMPÉTENCE 02</span>
+          <h3>Vérifier</h3>
+          <p class="verbe">Valider un système par des essais et des mesures, et prouver sa conformité au cahier des charges.</p>
+          <div class="preuve">
+            <div class="qui">Vision embarquée · 135 essais</div>
+            <p>Validation statistique d'un algorithme de classification : matrice de confusion sur 135 tests, exactitude de 94,07 %, précision et rappel calculés classe par classe, F1-Score de 0,94, puis courbe ROC pour fixer le seuil de décision par la mesure et non à l'estimation.</p>
+          </div>
+          <div class="preuve">
+            <div class="qui">Régulation de température et chantier Orly</div>
+            <p>Procédures d'essai écrites pour chacune des sept cartes, avec carte de test injectant les valeurs d'entrée, relevés à l'oscilloscope et contrôle par caméra thermique. Sur chantier, essais de continuité et contrôle d'isolement avant mise sous tension.</p>
+          </div>
+          <div class="app">
+            <div>Mettre en oeuvre une procédure de vérification</div>
+            <div>Valider un prototype par des tests unitaires</div>
+            <div>Interpréter une mesure et conclure sur la conformité</div>
+          </div>
+        </article>
+
+        <article class="comp am">
+          <span class="code">COMPÉTENCE 03</span>
+          <h3>Maintenir</h3>
+          <p class="verbe">Diagnostiquer une défaillance sur un système en exploitation et rétablir son fonctionnement.</p>
+          <div class="preuve">
+            <div class="qui">CEGRI SAS · Aéroports de Paris, Orly</div>
+            <p>Diagnostic et correction d'une inversion entre commande 24 V et puissance 400 V sur des aérothermes de 15 kW, en site occupé : consignation, reprise du câblage sur schéma, contrôle d'isolement puis validation du fonctionnement. Dépannage d'une boucle de sécurité incendie.</p>
+          </div>
+          <div class="preuve">
+            <div class="qui">Banc de test LiDAR · Coupe de robotique</div>
+            <p>Conception d'un banc automatisé pour qualifier les modules LiDAR à 10, 20 et 30 cm, cent échantillons par seconde, rapports CSV et graphes d'erreur générés automatiquement pour isoler les capteurs défectueux avant montage.</p>
+          </div>
+          <div class="app">
+            <div>Identifier un dysfonctionnement avec un système adapté</div>
+            <div>Appliquer une procédure de sécurité électrique</div>
+            <div>Remettre en service et rendre compte</div>
+          </div>
+        </article>
+
+        <article class="comp">
+          <span class="code">COMPÉTENCE 04</span>
+          <h3>Implanter</h3>
+          <p class="verbe">Implanter une solution matérielle ou logicielle sur sa cible et la faire cohabiter avec l'existant.</p>
+          <div class="preuve">
+            <div class="qui">Acquisition vidéo sur SoC Cyclone V</div>
+            <p>Écriture en VHDL d'un maître DMA sur bus Avalon-MM, conversion RGB565 vers ARGB32 dans le composant, gestion du signal waitrequest, puis partage de la DDR3 entre le FPGA et Linux par partitionnement mémoire sous U-Boot pour supprimer le Kernel Panic.</p>
+          </div>
+          <div class="preuve">
+            <div class="qui">Cartes PCB · KiCad</div>
+            <p>Schéma électrique et routage double couche de la carte du robot éviteur d'obstacles et du banc LiDAR, jusqu'au montage et à la mise au point sur la carte réelle.</p>
+          </div>
+          <div class="app">
+            <div>Implanter un composant matériel sur une cible programmable</div>
+            <div>Configurer un système d'exploitation embarqué</div>
+            <div>Assurer la cohabitation matériel et logiciel</div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =====================================================================
+   1. DONNEES DES PROJETS
+   ===================================================================== */
+const ICONES = {
+  cam:'<svg viewBox="0 0 24 24"><path d="M3 7h4l2-2h6l2 2h4v12H3z"/><circle cx="12" cy="13" r="3.5"/></svg>',
+  puce:'<svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="1"/><path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4"/></svg>',
+  oeil:'<svg viewBox="0 0 24 24"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="2.5"/></svg>',
+  robot:'<svg viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="11" rx="2"/><path d="M12 4v4M8 13h.01M16 13h.01M9 17h6"/></svg>',
+  equil:'<svg viewBox="0 0 24 24"><path d="M12 3v18M4 8l8-3 8 3M6 8l-2 6a3 3 0 0 0 6 0L8 8M18 8l-2 6a3 3 0 0 0 6 0l-2-6"/></svg>',
+  chaud:'<svg viewBox="0 0 24 24"><path d="M10 13V5a2 2 0 1 1 4 0v8a4 4 0 1 1-4 0z"/><path d="M12 9v5"/></svg>',
+  volant:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v6M4.5 17l5-3M19.5 17l-5-3"/></svg>'
+};
+
+const PH = (t) => '<figure class="ph"><div class="ph-box"><span>PHOTO · '+t+'<br>remplacer par &lt;img src="img/…"&gt;</span></div><figcaption>'+t+'</figcaption></figure>';
+
+const PROJETS = [
+{
+  id:'camera', cat:['ia','asserv'], ic:'cam', annee:'2025 · 2026', maitrise:3,
+  titre:'Caméra de recul intelligente',
+  sous:'Téléopération temps réel, HUD de recul et détection de places par segmentation',
+  desc:"Voiture RC pilotée à distance : flux caméra, HUD de recul calculé en Bézier et détection automatique des places de stationnement par YOLOv8-seg.",
+  mots:['Raspberry Pi 4','C++','Qt','OpenCV','YOLOv8-seg','TCP/IP','Bézier'],
+  contexte:"SAE de troisième année. Objectif : piloter une voiture miniature à distance avec une vision exploitable, aider au stationnement et détecter automatiquement les places sur le flux réel.",
+  points:[
+    "Architecture distribuée : la Raspberry Pi 4 embarquée fait l'acquisition et la commande, le PC de contrôle assure le traitement lourd et l'affichage. Deux liaisons TCP/IP séparées, une pour la vidéo, une pour les ordres.",
+    "Boucle temps réel complète du capteur caméra jusqu'aux actionneurs moteur et direction, pilotée au clavier : Z avance, S recule, Q gauche, D droite, Espace arrêt.",
+    "HUD de recul : l'angle de braquage lu sur le servo (GPIO 18) alimente le calcul d'une courbe de Bézier quadratique, projetée sur le flux vidéo à chaque image.",
+    "Détection des places par YOLOv8-seg : jeu de données construit à la main sur Roboflow, une classe place, 142 instances annotées sur environ 150 captures caméra.",
+    "Inférence embarquée à 14 ou 15 images par seconde, seuil de confiance fixé à 0,6 dans le code."
+  ],
+  chiffres:[
+    {v:'0.954',l:'mAP@50 (masque)'},
+    {v:'0.743',l:'mAP@50-95'},
+    {v:'0.94',l:'F1 max à conf 0,70'},
+    {v:'15',l:'images par seconde'}
+  ],
+  html:`
+    <h4>Validation quantitative</h4>
+    <p class="muted" style="font-size:.93rem">Matrice de confusion du détecteur : 19 bonnes détections, 4 sur-détections, 1 place manquée. Pour de la segmentation, ce sont mAP, précision, rappel et F1 qui font foi, pas une courbe ROC.</p>
+    <table class="mat">
+      <tr><th></th><th>Vérité : place</th><th>Vérité : fond</th></tr>
+      <tr><th>Prédit place</th><td class="diag">19</td><td class="err">4</td></tr>
+      <tr><th>Prédit fond</th><td class="err">1</td><td>0</td></tr>
+    </table>
+    <h4>Le calcul de trajectoire</h4>
+    <pre><code><span class="cm">// Trajectoire de recul : Bezier quadratique, recalculee a chaque image</span>
+<span class="kw">float</span> delta = servo.<span class="kw">angle</span>();          <span class="cm">// braquage lu sur GPIO18</span>
+Point P0 = sol(<span class="nb">-0.55f</span>, <span class="nb">0.0f</span>);          <span class="cm">// bas de l ecran</span>
+Point P1 = sol(<span class="nb">-0.55f</span> + delta*<span class="nb">0.15f</span>, <span class="nb">0.42f</span>);
+Point P2 = sol(<span class="nb">-0.55f</span> + delta*<span class="nb">0.90f</span>, <span class="nb">1.0f</span>);
+<span class="kw">for</span> (<span class="kw">float</span> t = <span class="nb">0</span>; t &lt;= <span class="nb">1</span>; t += <span class="nb">0.02f</span>)
+    trace(bezier(P0, P1, P2, t));</code></pre>
+    <div class="duo" style="margin-top:22px">`+PH('HUD en fonctionnement sur le flux caméra')+PH('Voiture RC instrumentée, Raspberry Pi et caméra')+`</div>
+  `
+},
+{
+  id:'fpga', cat:['fpga'], ic:'puce', annee:'2025 · 2026', maitrise:3,
+  titre:'Acquisition vidéo temps réel sur FPGA',
+  sous:'SoC Intel Cyclone V, DE10-Nano, caméra OV7670 vers DDR3 par maître DMA',
+  desc:"Chaîne complète du capteur au pixel affiché : capture VHDL, FIFO double horloge, DMA Avalon-MM, DDR3 partagée avec Linux et affichage Qt.",
+  mots:['VHDL','Cyclone V','Avalon-MM','DDR3','Linux embarqué','U-Boot','Qt'],
+  contexte:"Projet de troisième année sur carte Terasic DE10-Nano. L'architecture était fournie, le travail consistait à développer les modules VHDL et C++ et surtout à faire cohabiter le matériel et le système. Ma partie : l'écriture en DDR3 par le maître DMA et la gestion de la mémoire partagée.",
+  points:[
+    "Passage de l'horloge caméra PCLK à l'horloge système 50 MHz par une FIFO double horloge asynchrone, pour éliminer la métastabilité.",
+    "Conversion RGB565 vers ARGB32 directement dans le composant DMA : le processeur reçoit un format directement affichable, ce qui a rendu inutile l'inversion d'octets faite auparavant en logiciel.",
+    "Maître DMA sur bus Avalon-MM relié au pont HPS-to-SDRAM, avec machine à états gérant avm_waitrequest : tant que le contrôleur mémoire n'accepte pas la requête, adresse et données sont maintenues.",
+    "Kernel Panic au démarrage : Linux occupait tout le gigaoctet de DDR3, et le FPGA écrasait ses données en écrivant à 0x30000000. Diagnostic par la console série.",
+    "Solution : limitation de la mémoire vue par Linux à 768 Mo dans les bootargs U-Boot, ce qui libère 256 Mo strictement réservés au FPGA.",
+    "Vérification à l'outil memtool sur l'adresse 0x30000000, et fermeture des ponts HPS vers FPGA avant reprogrammation pour éviter les gels de carte."
+  ],
+  chiffres:[
+    {v:'256 Mo',l:'réservés au FPGA'},
+    {v:'768 Mo',l:'laissés à Linux'},
+    {v:'0x30000000',l:'base vidéo DDR3'},
+    {v:'50 MHz',l:'horloge du bus Avalon'}
+  ],
+  html:`
+    <h4>Flux de données</h4>
+    <svg class="soc" viewBox="0 0 620 120" role="img" aria-label="Flux de la caméra vers l'affichage Qt">
+      <rect class="bloc" x="6" y="34" width="76" height="46" rx="7"/>
+      <text class="txt" x="44" y="54" text-anchor="middle">OV7670</text>
+      <text class="txt pt" x="44" y="68" text-anchor="middle">RGB565</text>
+      <path class="fil" d="M82 57h56"/>
+      <circle class="paquet p1" cx="88" cy="57" r="2.6"/>
+      <circle class="paquet p2" cx="88" cy="57" r="2.6"/>
+      <rect class="bloc" x="138" y="20" width="150" height="74" rx="7" stroke="rgba(100,255,218,.4)"/>
+      <text class="txt" x="213" y="35" text-anchor="middle" fill="#64FFDA">FPGA</text>
+      <rect class="bloc" x="150" y="44" width="58" height="36" rx="5"/>
+      <text class="txt pt" x="179" y="60" text-anchor="middle">FIFO</text>
+      <text class="txt pt" x="179" y="72" text-anchor="middle">2 horloges</text>
+      <rect class="bloc" x="218" y="44" width="58" height="36" rx="5"/>
+      <text class="txt pt" x="247" y="60" text-anchor="middle">DMA</text>
+      <text class="txt pt" x="247" y="72" text-anchor="middle">Avalon</text>
+      <path class="fil" d="M288 57h68"/>
+      <text class="txt pt" x="322" y="49" text-anchor="middle">F2SDRAM</text>
+      <circle class="paquet p3" cx="292" cy="57" r="2.6"/>
+      <rect class="bloc" x="356" y="24" width="106" height="66" rx="7"/>
+      <text class="txt" x="409" y="44" text-anchor="middle">DDR3</text>
+      <text class="txt pt" x="409" y="58" text-anchor="middle">0x30000000</text>
+      <text class="txt pt" x="409" y="72" text-anchor="middle">256 Mo FPGA</text>
+      <path class="fil" d="M462 57h60"/>
+      <rect class="bloc" x="522" y="34" width="90" height="46" rx="7"/>
+      <text class="txt" x="567" y="52" text-anchor="middle">Qt / Linux</text>
+      <text class="txt pt" x="567" y="66" text-anchor="middle">mmap /dev/mem</text>
+    </svg>
+    <h4>Conversion du format dans le composant</h4>
+    <pre><code><span class="cm">-- Extraction des composantes</span>
+r5 &lt;= rgb565(<span class="nb">15</span> <span class="kw">downto</span> <span class="nb">11</span>);
+g6 &lt;= rgb565(<span class="nb">10</span> <span class="kw">downto</span> <span class="nb">5</span>);
+b5 &lt;= rgb565(<span class="nb">4</span>  <span class="kw">downto</span> <span class="nb">0</span>);
+<span class="cm">-- Passage sur 8 bits puis mot de 32 bits</span>
+r8 &lt;= r5 &amp; r5(<span class="nb">4</span> <span class="kw">downto</span> <span class="nb">2</span>);
+argb32 &lt;= x<span class="nb">"FF"</span> &amp; r8 &amp; g8 &amp; b8;</code></pre>
+    <h4>La correction du Kernel Panic</h4>
+    <pre><code>SOCFPGA_CYCLONE5 # <span class="kw">setenv</span> bootargs <span class="nb">"\${bootargs} mem=768M"</span>
+SOCFPGA_CYCLONE5 # <span class="kw">saveenv</span>
+SOCFPGA_CYCLONE5 # <span class="kw">reset</span>
+<span class="cm"># Linux s arrete a 0x2FFFFFFF, le FPGA ecrit au dessus sans collision</span></code></pre>
+    <div class="duo" style="margin-top:22px">`+PH('Flux caméra affiché par l\'application Qt')+PH('Banc DE10-Nano avec la caméra OV7670')+`</div>
+  `
+},
+{
+  id:'vision', cat:['ia'], ic:'oeil', annee:'2026', maitrise:2,
+  titre:'Vision par ordinateur sans réseau de neurones',
+  sous:'Classification de formes par moments d\'image sur Raspberry Pi',
+  desc:"Discrimination automatique de jetons par calcul mathématique explicite : moments d'image, ellipse d'inertie, arbre de décision, validation statistique.",
+  mots:['Python','NumPy','picamera2','Moments','Matrice de confusion','ROC'],
+  contexte:"Cours d'intelligence artificielle pour les systèmes embarqués. Le parti pris était de résoudre une classification sans réseau de neurones, avec des descripteurs que nous définissons et savons expliquer.",
+  points:[
+    "Chaîne complète : acquisition picamera2, recadrage sur la zone d'intérêt, niveaux de gris, binarisation en seuillage inverse pour isoler l'objet du fond.",
+    "Extraction géométrique par les moments d'image : moments centrés d'ordre 2, matrice de covariance, diagonalisation, puis longueur et largeur de l'ellipse d'inertie équivalente.",
+    "Classification par arbre de décision sur le ratio d'allongement L sur W, puis sur la longueur, en trois classes : rond, rectangle court, rectangle long.",
+    "Problème résolu : dépassement de capacité sur le calcul de M20, les images étant stockées en entiers 8 bits. Conversion forcée en float64 avant calcul.",
+    "Seuil de décision optimisé par courbe ROC : le script balaie les seuils de ratio de 1,0 à 2,0 et retient le meilleur compromis au lieu d'une valeur choisie à l'estime."
+  ],
+  chiffres:[
+    {v:'94,07 %',l:'exactitude sur 135 essais'},
+    {v:'0,94',l:'F1-Score macro'},
+    {v:'0,94',l:'précision moyenne'},
+    {v:'3',l:'classes discriminées'}
+  ],
+  html:`
+    <h4>Matrice de confusion, 135 essais</h4>
+    <table class="mat">
+      <tr><th></th><th>Rond</th><th>Rect. court</th><th>Rect. long</th></tr>
+      <tr><th>Rond</th><td class="diag">45</td><td>1</td><td>1</td></tr>
+      <tr><th>Rect. court</th><td>1</td><td class="diag">40</td><td class="err">3</td></tr>
+      <tr><th>Rect. long</th><td>0</td><td>2</td><td class="diag">42</td></tr>
+    </table>
+    <h4>Les descripteurs, écrits à la main</h4>
+    <pre><code><span class="cm"># Moments centres d ordre 2 : variance et covariance</span>
+mu20 = M20/M00 - xm**<span class="nb">2</span>
+mu02 = M02/M00 - ym**<span class="nb">2</span>
+mu11 = M11/M00 - xm*ym
+t = np.sqrt((mu20 - mu02)**<span class="nb">2</span> + <span class="nb">4</span>*mu11**<span class="nb">2</span>)
+L = np.sqrt(<span class="nb">8</span>*(mu20 + mu02 + t))   <span class="cm"># longueur</span>
+W = np.sqrt(<span class="nb">8</span>*(mu20 + mu02 - t))   <span class="cm"># largeur</span>
+ratio = L / W                    <span class="cm"># 1.0 pour un cercle parfait</span></code></pre>
+    <div class="duo" style="margin-top:22px">`+PH('Calibration du masque et zone d\'intérêt')+PH('Banc d\'essai : Raspberry Pi, caméra, jetons')+`</div>
+  `
+},
+{
+  id:'robot', cat:['carte','asserv'], ic:'robot', annee:'2024 · 2025', maitrise:3,
+  titre:'Robot éviteur d\'obstacles',
+  sous:'Première place nationale · Coupe de robotique, Cachan',
+  desc:"Robot à cinq cartes microcontrôleurs. J'ai pris en charge la carte moteur asservie en vitesse et le banc de test automatisé des LiDAR.",
+  mots:['C++','Raspberry Pi Pico','LiDAR','I2C','KiCad','Qt Creator'],
+  contexte:"Projet de fin d'année en équipe : concevoir un robot capable de se déplacer en évitant les obstacles. Cinq cartes se répartissent les rôles, moteurs, émission, réception, évitement, et une carte centrale qui centralise les données et ajuste la vitesse.",
+  points:[
+    "Carte moteur : capture des impulsions des capteurs de pulsation, calcul de la vitesse réelle, comparaison à la consigne, correction et bouclage rétroactif.",
+    "Banc de test LiDAR : cahier des charges à trois portées, 10, 20 et 30 cm, puis conception d'un PCB double couche capable d'alimenter et de piloter jusqu'à trois LiDAR en parallèle.",
+    "Firmware C sur Arduino pour le balayage, script sous Qt Creator qui récupère cent échantillons par seconde depuis l'oscilloscope et génère automatiquement les rapports CSV et les graphes d'erreur.",
+    "Résultat concret : les modules LiDAR défectueux sont identifiés avant montage, ce qui a supprimé une source de pannes en compétition.",
+    "Communication entre cartes par bus I2C et signaux tout ou rien, schéma électrique et routage sous KiCad."
+  ],
+  chiffres:[
+    {v:'1re',l:'place nationale'},
+    {v:'5',l:'cartes microcontrôleurs'},
+    {v:'100/s',l:'échantillons au banc'},
+    {v:'2',l:'couches de routage'}
+  ],
+  html:`
+    <div class="duo" style="margin-top:6px">`+PH('Robot et balise en configuration de match')+PH('Schéma et routage KiCad de la carte moteur')+`</div>
+  `
+},
+{
+  id:'balancing', cat:['asserv'], ic:'equil', annee:'2023 · 2024', maitrise:2,
+  titre:'Robot balancing en réseau',
+  sous:'Équilibre par régulateur PID, supervision MQTT',
+  desc:"Robot à deux roues maintenu en équilibre par PID, mesuré par gyroscope et supervisé à distance sur un réseau local par MQTT.",
+  mots:['PID','MQTT','Raspberry Pi','BeagleBone Blue','Qt','Réseau local'],
+  contexte:"Compte rendu SBC en équipe de trois. Objectif : un robot qui mesure son orientation, se maintient en équilibre et se commande à distance.",
+  points:[
+    "Mise en place du réseau local : routeur et switch, adressage fixe, configuration d'une seconde carte réseau pour rester joignable à la fois sur le réseau du projet et sur celui de l'établissement.",
+    "Association de la BeagleBone Blue au réseau par Wi-Fi, liaison série via USB pour la configuration initiale.",
+    "Protocole MQTT pour publier vitesse, angle et état de connexion vers l'interface, et recevoir les consignes.",
+    "Étude du PID terme par terme, relation entre l'angle mesuré et la commande moteur, tableau des réactions observées en faisant varier Kp, Ki et Kd."
+  ],
+  chiffres:[
+    {v:'PID',l:'correction complète'},
+    {v:'MQTT',l:'supervision temps réel'},
+    {v:'3',l:'équipiers, 3 lots'}
+  ],
+  html:`<div class="duo" style="margin-top:6px">`+PH('Robot en équilibre et interface de supervision')+PH('Schéma du réseau local du projet')+`</div>`
+},
+{
+  id:'temperature', cat:['carte'], ic:'chaud', annee:'2023', maitrise:2,
+  titre:'Régulation de température',
+  sous:'SAE · sept cartes conçues, soudées et qualifiées',
+  desc:"Système complet de régulation, de la thermistance à la commande de chauffe, découpé en fonctions et validé carte par carte.",
+  mots:['Analyse fonctionnelle','AOP','74HC00','NE555','NMOS','Dossier de fabrication'],
+  contexte:"Système régulant la température d'un objet, ici un bloc d'aluminium chauffé par une résistance de quelques watts. Projet mené en binôme, du cahier des charges au test final.",
+  points:[
+    "Découpage fonctionnel : alimenter, capter, amplifier, comparer, afficher, commander la chauffe, chauffer, clignoter.",
+    "Capteur identifié comme CTN par relevé de la caractéristique, calcul des courbes R(T) et Um(T) sur tableur avant réalisation.",
+    "Étage d'amplification calculé pour garder la tension image de la température entre 2 V et 3 V, avec offset de 2,5 V à partir d'une alimentation 5 V.",
+    "Comparaison par deux amplificateurs opérationnels et pont diviseur pour fixer les seuils, décodage par portes NAND 74HC00 pilotant trois LED d'état, commande de chauffe en tout ou rien sur transistor NMOS, signalisation par NE555 en astable.",
+    "Sept cartes soudées sur plaque pastillée, chacune vérifiée par une carte de test dédiée qui injecte les entrées et permet de lire tensions et courants de sortie.",
+    "Recette finale à l'oscilloscope et à la caméra thermique, puis mesure de la puissance moyenne nécessaire au maintien en température."
+  ],
+  chiffres:[
+    {v:'7',l:'cartes réalisées'},
+    {v:'8',l:'fonctions identifiées'},
+    {v:'2 à 3 V',l:'plage image utile'}
+  ],
+  html:`
+    <h4>Procédure de vérification</h4>
+    <p class="muted" style="font-size:.93rem">À chaque carte soudée, la même méthode : injection des valeurs d'entrée par la carte de test, lecture des tensions et courants de sortie, comparaison au calcul théorique, puis relevé à l'oscilloscope des seuils de basculement. Toute carte non conforme est reprise avant assemblage.</p>
+    <div class="duo" style="margin-top:18px">`+PH('Les sept cartes assemblées en fin de projet')+PH('Relevé oscilloscope des tensions de seuil')+`</div>
+  `
+},
+{
+  id:'kart', cat:['asserv','carte'], ic:'volant', annee:'2025 · 2026', maitrise:2,
+  titre:'Asservissement de position, kart électrique',
+  sous:'Direction assistée régulée en boucle fermée',
+  desc:"Régulation PID de l'angle de braquage d'un kart électrique, mesure par capteur à effet Hall et encodeur, carte conçue sous KiCad.",
+  mots:['PID','Effet Hall','Encodeur','KiCad'],
+  contexte:"Projet d'asservissement sur un kart électrique de l'IUT : maintenir l'angle de braquage demandé malgré les efforts sur la direction.",
+  points:[
+    "Mesure de la position angulaire par capteur à effet Hall associé à un encodeur.",
+    "Régulation PID de l'angle de braquage, réglage des coefficients par essais successifs sur le système réel.",
+    "Conception de la carte d'interface sous KiCad, du schéma au routage."
+  ],
+  chiffres:[
+    {v:'PID',l:'boucle fermée'},
+    {v:'Hall',l:'mesure de position'}
+  ],
+  html:`<div class="duo" style="margin-top:6px">`+PH('Kart instrumenté et carte de commande')+`</div>`
+}
+];
+
+/* =====================================================================
+   2. CONSTRUCTION DES CARTES PROJET
+   ===================================================================== */
+const grille = document.getElementById('grille-projets');
+grille.innerHTML = PROJETS.map((p,i)=>`
+  <article class="projet" role="button" tabindex="0" data-id="${p.id}" data-cat="${p.cat.join(' ')}" data-reveal style="--d:${(i%3)*.07}s">
+    <div class="rang">
+      <span class="ic">${ICONES[p.ic]}</span>
+      <span class="maitrise">${[1,2,3].map(n=>`<i class="${n<=p.maitrise?'on':''}"></i>`).join('')}</span>
+      <span class="annee">${p.annee}</span>
+    </div>
+    <h3>${p.titre}</h3>
+    <p class="desc">${p.desc}</p>
+    <div class="mots">${p.mots.slice(0,4).map(m=>`<span>${m}</span>`).join('')}</div>
+    <span class="ouvrir">Détail technique <svg viewBox="0 0 16 16"><path d="M6 3l5 5-5 5V3z"/></svg></span>
+  </article>`).join('');
+
+/* =====================================================================
+   3. FENETRE PROJET
+   ===================================================================== */
+const voile = document.getElementById('voile');
+const fiche = document.getElementById('fiche');
+let dernierFocus = null;
+
+function ouvrirProjet(id){
+  const p = PROJETS.find(x=>x.id===id); if(!p) return;
+  dernierFocus = document.activeElement;
+  fiche.innerHTML = `
+    <div class="fiche-tete">
+      <span class="ic" style="width:44px;height:44px;border-radius:11px;display:grid;place-items:center;background:rgba(100,255,218,.09);color:var(--cyan);flex:none">${ICONES[p.ic]}</span>
+      <div>
+        <h3 id="fiche-titre">${p.titre}</h3>
+        <p class="muted" style="margin:4px 0 0;font-size:.92rem">${p.sous}</p>
+      </div>
+      <button class="fermer" data-ferme aria-label="Fermer"><svg viewBox="0 0 16 16"><path d="M3 3l10 10M13 3L3 13"/></svg></button>
+    </div>
+    <div class="mots" style="display:flex;flex-wrap:wrap;gap:6px;margin:18px 0 6px">
+      ${p.mots.map(m=>`<span class="tag">${m}</span>`).join('')}
+    </div>
+    <h4>Contexte</h4>
+    <p style="font-size:.96rem">${p.contexte}</p>
+    <h4>Ce que j'ai fait</h4>
+    <ul>${p.points.map(x=>`<li>${x}</li>`).join('')}</ul>
+    ${p.chiffres?`<h4>Chiffres</h4><div class="chiffres">${p.chiffres.map(c=>`<div class="chiffre"><b>${c.v}</b><span>${c.l}</span></div>`).join('')}</div>`:''}
+    ${p.html||''}
+  `;
+  voile.classList.add('ouvert');
+  document.body.classList.add('bloque');
+  voile.scrollTop = 0;
+  fiche.querySelector('[data-ferme]').focus();
+}
+
+function fermerTout(){
+  voile.classList.remove('ouvert');
+  document.getElementById('page-comp').classList.remove('ouvert');
+  document.body.classList.remove('bloque');
+  if(dernierFocus){dernierFocus.focus();dernierFocus=null;}
+}
+
+grille.addEventListener('click', e=>{
+  const c = e.target.closest('.projet'); if(c) ouvrirProjet(c.dataset.id);
+});
+grille.addEventListener('keydown', e=>{
+  const c = e.target.closest('.projet'); if(!c) return;
+  if(e.key==='Enter' || e.key===' '){ e.preventDefault(); ouvrirProjet(c.dataset.id); }
+});
+
+/* inclinaison 3D au survol des cartes */
+if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches && window.matchMedia('(hover:hover)').matches){
+  grille.addEventListener('pointermove', e=>{
+    const c = e.target.closest('.projet'); if(!c) return;
+    const r = c.getBoundingClientRect();
+    const rx = ((e.clientY - r.top)/r.height - .5) * -7;
+    const ry = ((e.clientX - r.left)/r.width - .5) * 9;
+    c.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-5px)`;
+  });
+  grille.addEventListener('pointerleave', ()=>{
+    grille.querySelectorAll('.projet').forEach(c=>c.style.transform='');
+  }, true);
+  grille.addEventListener('pointerout', e=>{
+    const c = e.target.closest('.projet');
+    if(c && !c.contains(e.relatedTarget)) c.style.transform='';
+  });
+}
+document.addEventListener('click', e=>{
+  if(e.target.closest('[data-ferme]')) fermerTout();
+  if(e.target === voile) fermerTout();
+  if(e.target.closest('[data-comp]')) ouvrirComp();
+});
+
+/* =====================================================================
+   4. MATRICE DES COMPETENCES
+   ===================================================================== */
+const pageComp = document.getElementById('page-comp');
+function ouvrirComp(){
+  dernierFocus = document.activeElement;
+  pageComp.classList.add('ouvert');
+  document.body.classList.add('bloque');
+  pageComp.scrollTop = 0;
+  pageComp.querySelector('[data-ferme]').focus();
+}
+
+/* =====================================================================
+   5. FILTRES
+   ===================================================================== */
+document.querySelector('.filtres').addEventListener('click', e=>{
+  const b = e.target.closest('.filtre'); if(!b) return;
+  document.querySelectorAll('.filtre').forEach(x=>x.classList.remove('actif'));
+  b.classList.add('actif');
+  const f = b.dataset.f;
+  document.querySelectorAll('.projet').forEach(c=>{
+    c.classList.toggle('masque', f!=='tous' && !c.dataset.cat.split(' ').includes(f));
+  });
+});
+
+/* =====================================================================
+   6. APPARITIONS AU DEFILEMENT
+   ===================================================================== */
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(en=>{
+    if(en.isIntersecting){
+      const el = en.target;
+      const d = el.style.getPropertyValue('--d') || '0s';
+      el.style.transitionDelay = d;
+      el.classList.add('vu');
+      setTimeout(()=>{ el.style.transitionDelay = ''; }, 900);
+      io.unobserve(el);
+    }
+  });
+},{threshold:.14, rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('[data-reveal]').forEach(el=>io.observe(el));
+
+/* bargraphs */
+document.querySelectorAll('.bargraph').forEach(bg=>{
+  const n = +bg.dataset.n;
+  for(let i=1;i<=10;i++){
+    const s = document.createElement('i');
+    if(i<=n) s.className = 'plein';
+    s.style.transitionDelay = (i*32)+'ms';
+    bg.appendChild(s);
+  }
+});
+
+/* =====================================================================
+   7. NAVIGATION
+   ===================================================================== */
+const burger = document.getElementById('burger');
+const menu = document.getElementById('menu');
+burger.addEventListener('click',()=>{
+  const o = menu.classList.toggle('ouvert');
+  burger.setAttribute('aria-expanded', o);
+});
+menu.addEventListener('click',e=>{ if(e.target.tagName==='A') menu.classList.remove('ouvert'); });
+
+const sections = [...document.querySelectorAll('main section[id]')];
+const liens = [...document.querySelectorAll('.nav-liens a')];
+const ioNav = new IntersectionObserver(entries=>{
+  entries.forEach(en=>{
+    if(en.isIntersecting){
+      liens.forEach(a=>a.classList.toggle('actif', a.getAttribute('href')==='#'+en.target.id));
+    }
+  });
+},{rootMargin:'-45% 0px -50% 0px'});
+sections.forEach(s=>ioNav.observe(s));
+
+/* =====================================================================
+   8. CHRONOMETRE DE SOUTENANCE
+   ===================================================================== */
+(function(){
+  const total = 300;
+  let reste = total, id = null;
+  const out = document.getElementById('montre');
+  const box = document.getElementById('chrono');
+  const btn = document.getElementById('go');
+  const ico = document.getElementById('ico-go');
+  const PLAY = 'M4 2.5v11l9-5.5z', PAUSE = 'M4 2.5h3.2v11H4zm4.8 0H12v11H8.8z';
+  function peindre(){
+    const m = String(Math.floor(reste/60)).padStart(2,'0');
+    const s = String(reste%60).padStart(2,'0');
+    out.textContent = m+':'+s;
+    box.classList.toggle('court', reste<=60 && reste>15);
+    box.classList.toggle('fin', reste<=15);
+  }
+  btn.addEventListener('click',()=>{
+    if(id){ clearInterval(id); id=null; ico.setAttribute('d',PLAY); return; }
+    ico.setAttribute('d',PAUSE);
+    id = setInterval(()=>{
+      reste--; peindre();
+      if(reste<=0){ clearInterval(id); id=null; ico.setAttribute('d',PLAY); reste=0; }
+    },1000);
+  });
+  document.getElementById('raz').addEventListener('click',()=>{
+    clearInterval(id); id=null; ico.setAttribute('d',PLAY); reste=total; peindre();
+  });
+  peindre();
+})();
+
+/* =====================================================================
+   9. LE HUD DE RECUL
+   Reconstitution du HUD du projet : projection perspective, guides en
+   courbes de Bezier quadratiques, places detectees et barre d etat.
+   ===================================================================== */
+(function(){
+  const cv = document.getElementById('hud');
+  const ctx = cv.getContext('2d');
+  const doux = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const slider = document.getElementById('braquage');
+
+  let W = 800, H = 500;
+  const etat = { angle:0, cible:0, vitesse:0, fps:15, t:0 };
+
+  // places detectees, coordonnees au sol : x lateral, z profondeur
+  const places = [
+    {x:-1.35, z:.62, w:.62, d:.34, c:.91},
+    {x: 1.30, z:.78, w:.62, d:.34, c:.84},
+    {x:-1.30, z:1.02, w:.62, d:.34, c:.77}
+  ];
+
+  function taille(){
+    const r = cv.getBoundingClientRect();
+    const dpr = Math.min(window.devicePixelRatio||1, 2);
+    W = Math.round(r.width); H = Math.round(r.width*0.625);
+    cv.width = W*dpr; cv.height = H*dpr;
+    cv.style.height = H+'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+
+  // projection perspective simple : z de 0 (bas) vers 1 et plus (horizon)
+  const YH = () => H*0.30;
+  function sol(x, z){
+    const p = 1/(1+2.3*z);
+    return { x: W/2 + x*(W*0.52)*p, y: YH() + (H-YH())*p };
+  }
+  function bez(P0,P1,P2,t){
+    const u = 1-t;
+    return { x: u*u*P0.x + 2*u*t*P1.x + t*t*P2.x,
+             y: u*u*P0.y + 2*u*t*P1.y + t*t*P2.y };
+  }
+
+  function fond(){
+    // ciel / mur
+    const g = ctx.createLinearGradient(0,0,0,H);
+    g.addColorStop(0,'#20262f'); g.addColorStop(.29,'#2b323d');
+    g.addColorStop(.31,'#6a6a68'); g.addColorStop(1,'#9a9791');
+    ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
+    // lignes de fuite du sol
+    ctx.strokeStyle = 'rgba(255,255,255,.06)'; ctx.lineWidth = 1;
+    for(let i=-6;i<=6;i++){
+      const a = sol(i*0.9, 0.02), b = sol(i*0.9, 3.4);
+      ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
+    }
+    for(let z=0.05; z<2.6; z+=0.22){
+      const a = sol(-6,z), b = sol(6,z);
+      ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
+    }
+  }
+
+  function detections(){
+    ctx.lineWidth = 2;
+    places.forEach((p,i)=>{
+      const c1 = sol(p.x-p.w, p.z), c2 = sol(p.x+p.w, p.z),
+            c3 = sol(p.x+p.w*1.5, p.z+p.d), c4 = sol(p.x-p.w*1.5, p.z+p.d);
+      ctx.beginPath();
+      ctx.moveTo(c1.x,c1.y); ctx.lineTo(c2.x,c2.y); ctx.lineTo(c3.x,c3.y); ctx.lineTo(c4.x,c4.y);
+      ctx.closePath();
+      ctx.fillStyle = 'rgba(100,220,255,.13)'; ctx.fill();
+      ctx.strokeStyle = 'rgba(120,230,255,.85)'; ctx.stroke();
+      const cx = (c1.x+c3.x)/2, cy = (c1.y+c3.y)/2;
+      ctx.fillStyle = '#ff3b30';
+      ctx.beginPath(); ctx.arc(cx,cy,4,0,7); ctx.fill();
+      ctx.font = '600 12px "JetBrains Mono", monospace';
+      ctx.fillStyle = '#e8f2ff'; ctx.textAlign = 'center';
+      ctx.fillText('P'+(i+1)+'  '+p.c.toFixed(2), cx, cy-11);
+    });
+    ctx.textAlign = 'left';
+  }
+
+  function guides(){
+    const a = etat.angle;                       // -1 a 1
+    const demi = 0.55;
+    const G0 = sol(-demi,0.02), G1 = sol(-demi + a*0.30, 0.42), G2 = sol(-demi + a*0.95, 1.05);
+    const D0 = sol( demi,0.02), D1 = sol( demi + a*0.30, 0.42), D2 = sol( demi + a*0.95, 1.05);
+
+    // zone balayee
+    ctx.beginPath();
+    ctx.moveTo(G0.x,G0.y); ctx.quadraticCurveTo(G1.x,G1.y,G2.x,G2.y);
+    ctx.lineTo(D2.x,D2.y); ctx.quadraticCurveTo(D1.x,D1.y,D0.x,D0.y);
+    ctx.closePath();
+    ctx.fillStyle = 'rgba(92,84,214,.42)'; ctx.fill();
+
+    // barres de distance
+    [[.34,'#111827'],[.62,'#111827'],[1,'#111827']].forEach(([t,col])=>{
+      const g = bez(G0,G1,G2,t), d = bez(D0,D1,D2,t);
+      ctx.strokeStyle = col; ctx.lineWidth = 2.4;
+      ctx.beginPath(); ctx.moveTo(g.x,g.y); ctx.lineTo(d.x,d.y); ctx.stroke();
+    });
+
+    // bords orange
+    ctx.strokeStyle = '#ffa41b'; ctx.lineWidth = 6; ctx.lineCap = 'round';
+    ctx.beginPath(); ctx.moveTo(G0.x,G0.y); ctx.quadraticCurveTo(G1.x,G1.y,G2.x,G2.y); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(D0.x,D0.y); ctx.quadraticCurveTo(D1.x,D1.y,D2.x,D2.y); ctx.stroke();
+
+    // limite de proximite
+    ctx.strokeStyle = '#ff2d20'; ctx.lineWidth = 6;
+    ctx.beginPath(); ctx.moveTo(G0.x,G0.y); ctx.lineTo(D0.x,D0.y); ctx.stroke();
+    ctx.lineCap = 'butt';
+  }
+
+  function overlay(){
+    ctx.fillStyle = 'rgba(10,16,28,.62)'; ctx.fillRect(0,0,W,30);
+    ctx.font = '600 13px "JetBrains Mono", monospace';
+    ctx.fillStyle = '#ffffff'; ctx.fillText('FPS: '+etat.fps, 12, 20);
+    ctx.fillStyle = '#3ddc84'; ctx.fillText('VID: OK', 100, 20);
+    ctx.fillText('CMD: OK', 176, 20);
+    const mot = etat.vitesse>0.05 ? 'AVANT' : etat.vitesse<-0.05 ? 'RECUL' : 'STOP';
+    ctx.fillStyle = etat.vitesse<-0.05 ? '#ffa41b' : '#e8f2ff';
+    ctx.textAlign = 'right';
+    ctx.fillText(mot+'   '+Math.round(Math.abs(etat.vitesse)*100)+'%', W-12, 20);
+    ctx.textAlign = 'left';
+
+    ctx.fillStyle = 'rgba(10,16,28,.62)'; ctx.fillRect(0,H-28,W,28);
+    ctx.font = '600 12px "JetBrains Mono", monospace';
+    ctx.fillStyle = '#7fe3ff'; ctx.fillText('PLACES: '+places.length, 12, H-10);
+    ctx.fillStyle = '#ffa41b';
+    ctx.fillText('ANGLE: '+(etat.angle*32).toFixed(1)+'°', 118, H-10);
+    ctx.fillStyle = '#e8f2ff';
+    ctx.textAlign = 'right';
+    ctx.fillText('BEZIER QUADRATIQUE · CONF 0.60', W-12, H-10);
+    ctx.textAlign = 'left';
+  }
+
+  function dessiner(){
+    fond(); detections(); guides(); overlay();
+  }
+
+  function boucle(){
+    etat.t++;
+    etat.angle += (etat.cible - etat.angle)*0.10;
+    if(etat.t%18===0) etat.fps = 14 + (Math.random()<.5?0:1);
+    if(Math.abs(etat.vitesse)>0.02){
+      places.forEach(p=>{
+        p.z += etat.vitesse*0.006;
+        if(p.z<0.18) p.z = 1.6;
+        if(p.z>1.7) p.z = 0.22;
+      });
+    }
+    dessiner();
+    requestAnimationFrame(boucle);
+  }
+
+  const touches = {};
+  function majTouches(){
+    document.querySelectorAll('.touche').forEach(t=>{
+      t.classList.toggle('on', !!touches[t.dataset.k]);
+    });
+  }
+  function visible(){
+    const r = cv.getBoundingClientRect();
+    return r.bottom > 60 && r.top < window.innerHeight;
+  }
+  window.addEventListener('keydown', e=>{
+    if(document.body.classList.contains('bloque')) return;
+    const k = e.key.toLowerCase();
+    if(k==='c'){ ouvrirComp(); return; }
+    if(![ 'z','s','q','d',' ' ].includes(k)) return;
+    if(!visible()) return;
+    if(k===' ') e.preventDefault();
+    touches[k] = true; majTouches();
+    if(k==='z') etat.vitesse = 0.9;
+    if(k==='s') etat.vitesse = -0.9;
+    if(k==='q'){ etat.cible = Math.max(-1, etat.cible-0.28); slider.value = etat.cible*100; }
+    if(k==='d'){ etat.cible = Math.min( 1, etat.cible+0.28); slider.value = etat.cible*100; }
+    if(k===' '){ etat.vitesse = 0; etat.cible = 0; slider.value = 0; }
+    fige();
+  });
+  window.addEventListener('keyup', e=>{
+    const k = e.key.toLowerCase();
+    if(touches[k]){ touches[k]=false; majTouches(); }
+    if(k==='z'||k==='s') etat.vitesse = 0;
+  });
+  function fige(){ if(doux){ etat.angle = etat.cible; dessiner(); } }
+  slider.addEventListener('input', ()=>{ etat.cible = slider.value/100; fige(); });
+  document.querySelectorAll('.touche').forEach(t=>{
+    t.addEventListener('pointerdown', ()=>{
+      const k = t.dataset.k;
+      window.dispatchEvent(new KeyboardEvent('keydown',{key:k===' '?' ':k}));
+      setTimeout(()=>window.dispatchEvent(new KeyboardEvent('keyup',{key:k===' '?' ':k})), 260);
+    });
+  });
+
+  window.addEventListener('resize', ()=>{ taille(); dessiner(); });
+  taille();
+  if(doux){ dessiner(); } else { boucle(); }
+})();
+
+/* =====================================================================
+   10. ECHAP
+   ===================================================================== */
+document.addEventListener('keydown', e=>{
+  if(e.key==='Escape') fermerTout();
+});
+</script>
+</body>
+</html>
