@@ -488,9 +488,10 @@ table.mat td.err{color:var(--rouge)}
     <div class="nav-liens" id="menu">
       <a href="#savoir-faire"><span class="num">01</span>Bilan</a>
       <a href="#projets"><span class="num">02</span>Projets</a>
-      <a href="#terrain"><span class="num">03</span>Terrain</a>
-      <a href="#competences"><span class="num">04</span>Compétences</a>
-      <a href="#contact"><span class="num">05</span>Contact</a>
+      <a href="#stage"><span class="num">03</span>Stage</a>
+      <a href="#terrain"><span class="num">04</span>Terrain</a>
+      <a href="#competences"><span class="num">05</span>Compétences</a>
+      <a href="#contact"><span class="num">06</span>Contact</a>
     </div>
     <div class="chrono" id="chrono">
       <output id="montre" aria-live="off">05:00</output>
@@ -639,11 +640,103 @@ table.mat td.err{color:var(--rouge)}
   </div>
 </section>
 
-<!-- ======================= 03 · TERRAIN ======================= -->
+<!-- ======================= 03 · STAGE ======================= -->
+<style>
+  #stage .stage-meta{display:flex;flex-wrap:wrap;gap:10px;margin:2px 0 34px}
+  #stage .stage-meta span{font-family:var(--mono);font-size:.72rem;color:var(--texte);
+    border:1px solid var(--ligne-douce);border-radius:999px;padding:6px 13px;background:rgba(17,34,64,.5)}
+  #stage .stage-meta span b{color:var(--cyan);font-weight:600}
+  #stage .carte h3{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  #stage .carte h3 .rep{font-family:var(--mono);font-size:.72rem;color:var(--cyan);
+    border:1px solid var(--ligne);border-radius:6px;padding:2px 7px}
+  #stage .bloc{margin:14px 0}
+  #stage .bloc .lb{font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--muted);display:block;margin-bottom:4px}
+  #stage .bloc p{margin:0;font-size:.94rem}
+  #stage .niv{display:inline-flex;align-items:center;gap:8px;margin-top:16px;
+    font-family:var(--mono);font-size:.7rem;color:var(--ambre)}
+  #stage .niv .pt{width:7px;height:7px;border-radius:50%;background:var(--ambre)}
+  #stage .cle{font-family:var(--mono);font-size:.9rem;color:var(--cyan)}
+</style>
+<section class="section alt" id="stage">
+  <div class="wrap">
+    <div class="tete" data-reveal>
+      <div class="eyebrow"><span class="trait"></span>Étape 03 · Stage de fin d'études <span class="budget">10 min</span></div>
+      <h2>14 semaines en exploitation aéroportuaire</h2>
+      <p class="lead muted">Mon stage BUT3 chez CEGRI SAS, sur le chantier des Aéroports de Paris à Orly. Un hangar de réserve et des locaux tertiaires à équiper de A à Z, en courant fort et courant faible. Je ne détaille pas tout le chantier ici, je m'arrête sur les quatre situations où j'ai vraiment eu à réfléchir, diagnostiquer et décider.</p>
+    </div>
+
+    <div class="stage-meta" data-reveal>
+      <span><b>Entreprise</b> · CEGRI SAS</span>
+      <span><b>Site</b> · ADP Orly, hangar de réserve</span>
+      <span><b>Période</b> · 13 avr. au 17 juil. 2026</span>
+      <span><b>Tuteur</b> · P. Biffot, directeur général</span>
+      <span><b>Habilitation</b> · B1V, travail sous tension au voisinage</span>
+    </div>
+
+    <div class="grille-savoir">
+
+      <div class="carte" data-reveal style="--d:.04s">
+        <h3><span class="rep">01</span>Boucle SSI, reprise complète</h3>
+        <p class="st">Sécurité incendie · courant faible adressable</p>
+        <div class="bloc"><span class="lb">La situation</span>
+          <p>À la mise en test, la centrale affichait un défaut majeur de continuité et d'adressage. Des tronçons de la boucle avaient été tirés en dérivation, en étoile, et des polarités du bus de communication étaient croisées entre plusieurs socles.</p></div>
+        <div class="bloc"><span class="lb">Ce que j'ai fait</span>
+          <p>Test de continuité au multimètre en mode sonnette, câble par câble, jusqu'à repérer chaque arrivée dans chaque boîte. J'ai identifié les paires du bus de données HI et LO et l'alimentation 12 V, reconstitué la chaîne série sans interruption, puis remis en place la résistance de fin de ligne pour rétablir la surveillance par courant de repos.</p></div>
+        <div class="bloc"><span class="lb">Résultat</span>
+          <p>Boucle fermée aller-retour rétablie, plus aucun défaut à la centrale, tolérance de rupture de câble de nouveau garantie par le rebouclage.</p></div>
+        <span class="niv"><span class="pt"></span>C2 Vérifier · maîtrise confirmée</span>
+      </div>
+
+      <div class="carte" data-reveal style="--d:.11s">
+        <h3><span class="rep">02</span>Aérotherme 15 kW, inversion évitée</h3>
+        <p class="st">Diagnostic critique · puissance et commande</p>
+        <div class="bloc"><span class="lb">La situation</span>
+          <p>Avant mise sous tension, la télécommande d'un aérotherme triphasé de 15 kW ne répondait pas. Au contrôle point à point entre le coffret de relayage et le boîtier déporté, constat lourd : les signaux de commande en 24 V très basse tension avaient été raccordés sur les départs de tension réseau 400 V, et inversement.</p></div>
+        <div class="bloc"><span class="lb">Ce que j'ai fait</span>
+          <p>J'ai d'abord consigné avec vérification d'absence de tension. Puis déconnexion des liaisons erronées, repérage strict des phases de puissance aux bornes 1L1, 3L2, 5L3 des contacteurs ABB, raccordement de la commande sur les contacts auxiliaires 13NO et 14NO et la bobine, contrôle d'isolement, remise en service validée avec le chef d'équipe.</p></div>
+        <div class="encadre"><div class="t">Pourquoi ça comptait</div>
+          <p>Une mise sous tension directe aurait envoyé du 400 V sur des entrées prévues pour du 24 V. Destruction immédiate des cartes de régulation, et un risque de choc électrique à l'intervention suivante. Ce contrôle a évité les deux.</p></div>
+        <span class="niv"><span class="pt"></span>C3 Maintenir · maîtrise avancée</span>
+      </div>
+
+      <div class="carte" data-reveal style="--d:.18s">
+        <h3><span class="rep">03</span>Double va-et-vient, zone tertiaire</h3>
+        <p class="st">Éclairage terminal · repérage propre</p>
+        <div class="bloc"><span class="lb">La situation</span>
+          <p>Dans les bureaux et le sas d'accès, il fallait commander deux foyers d'éclairage indépendants depuis deux accès différents. J'ai câblé des circuits en double va-et-vient, donc deux paires de navettes qui passent dans les mêmes boîtes.</p></div>
+        <div class="bloc"><span class="lb">Ce que j'ai fait</span>
+          <p>Pour éliminer tout risque de croisement entre le foyer A et le foyer B, j'ai appliqué une convention de repérage par couleur au tirage sous gaine ICTA : navettes et retour de lampe orange pour le circuit A, violet pour le circuit B. Le montage reste lisible pour la personne qui reprendra derrière moi.</p></div>
+        <div class="bloc"><span class="lb">Résultat</span>
+          <p>Deux commandes indépendantes fonctionnelles, câblage conforme NF C 15-100, aucun croisement de navettes.</p></div>
+        <span class="niv"><span class="pt"></span>C4 Implanter · maîtrise professionnelle</span>
+      </div>
+
+      <div class="carte" data-reveal style="--d:.25s">
+        <h3><span class="rep">04</span>Tableaux divisionnaires et TGBT</h3>
+        <p class="st">Distribution d'énergie · armoires</p>
+        <div class="bloc"><span class="lb">La situation</span>
+          <p>Une grande partie de mon temps a porté sur l'équipement des armoires de distribution, jusqu'au tableau général basse tension qui reçoit l'arrivée 400 V.</p></div>
+        <div class="bloc"><span class="lb">Ce que j'ai fait</span>
+          <p>Pose des peignes d'alimentation, équilibrage des phases pour limiter le déséquilibre et le courant de neutre, confection des torons, raccordement sur borniers étagés repérés de D1 à D21. Départs dédiés protégés, dont un départ sur étiquette rouge pour la centrale SSI et le parafoudre en tête d'installation.</p></div>
+        <div class="bloc"><span class="lb">Résultat</span>
+          <p>Armoire propre, repérée, contrôlable. Chaque départ retrouvable au plan, ce qui change tout pour la maintenance future.</p></div>
+        <span class="niv"><span class="pt"></span>C1 Concevoir + C4 Implanter · autonomie terrain</span>
+      </div>
+
+    </div>
+
+    <p class="lead" style="margin-top:34px" data-reveal>
+      <span class="cle">Le fil rouge :</span> sur un site en exploitation, l'erreur ne se rattrape pas après coup. Ce que ce stage m'a appris, c'est la discipline du contrôle avant mise sous tension et du repérage qui parle à celui qui passe après moi.
+    </p>
+  </div>
+</section>
+
+<!-- ======================= 04 · TERRAIN ======================= -->
 <section class="section alt" id="terrain">
   <div class="wrap">
     <div class="tete" data-reveal>
-      <div class="eyebrow"><span class="trait"></span>Étape 03 · Expérience terrain <span class="budget">1 min</span></div>
+      <div class="eyebrow"><span class="trait"></span>Étape 04 · Expérience terrain <span class="budget">1 min</span></div>
       <h2>Le chantier, pas seulement le labo</h2>
       <p class="lead muted">Ce qui distingue mon profil : je passe du code au tableau électrique. Quatorze semaines sur un site aéroportuaire en exploitation, avec les contraintes de sécurité qui vont avec.</p>
     </div>
@@ -694,7 +787,7 @@ table.mat td.err{color:var(--rouge)}
   <div class="wrap">
     <div class="bandeau" data-reveal>
       <div>
-        <div class="eyebrow"><span class="trait"></span>Étape 04 · Diplôme <span class="budget">1 min</span></div>
+        <div class="eyebrow"><span class="trait"></span>Étape 05 · Diplôme <span class="budget">1 min</span></div>
         <h2>Matrice des compétences BUT GEII</h2>
         <p class="lead muted" style="margin-top:14px">Chaque compétence du référentiel est reliée à un acte technique précis, daté et vérifiable. La matrice s'ouvre en page pleine, isolée du reste du portfolio, et s'imprime telle quelle.</p>
         <div class="quatre">
@@ -713,7 +806,7 @@ table.mat td.err{color:var(--rouge)}
 <section class="section alt" id="contact">
   <div class="wrap">
     <div class="tete" data-reveal>
-      <div class="eyebrow"><span class="trait"></span>Étape 05 · Suite <span class="budget">15 s</span></div>
+      <div class="eyebrow"><span class="trait"></span>Étape 06 · Suite <span class="budget">15 s</span></div>
       <h2>Disponible en alternance</h2>
       <p class="lead muted">Cycle ingénieur de spécialité électronique à l'ISTP, Mines Saint-Étienne, à partir du 28 septembre 2026. Je cherche une entreprise où l'embarqué se confronte au matériel réel.</p>
     </div>
