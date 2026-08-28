@@ -12,19 +12,12 @@
   Fichier unique : HTML + CSS + JS. Aucune dépendance externe
   hors Google Fonts (le site reste lisible sans connexion).
 
-  POUR AJOUTER VOS PHOTOS : aucun code a modifier.
-  Creez un dossier "img" a cote de ce fichier et deposez y vos
-  photos avec exactement ces noms (.jpg ou .png) :
-
-     camera-hud            camera-voiture
-     fpga-qt               fpga-banc
-     vision-calibration    vision-banc
-     robot-match           robot-kicad
-     balancing-robot       balancing-reseau
-     temperature-cartes    temperature-oscillo
-     kart-carte
-
-  Une photo absente laisse un cadre en pointilles, sans casser la page.
+  POUR AJOUTER VOS PHOTOS :
+  chaque emplacement image est un bloc <figure class="ph">.
+  Remplacez le <div class="ph-box">...</div> par :
+      <img src="img/ma-photo.jpg" alt="Description">
+  et gardez le <figcaption>. Le style (coins arrondis, ombre,
+  bordure) s'applique automatiquement.
 
   RACCOURCIS CLAVIER :
   Z S Q D + Espace  : pilotage du HUD en page d'accueil
@@ -380,7 +373,7 @@ table.mat td.err{color:var(--rouge)}
   background:rgba(10,25,47,.55);padding:16px;text-align:center
 }
 .ph-box span{font-family:var(--mono);font-size:.7rem;color:var(--muted)}
-.ph img{border-radius:11px;box-shadow:0 20px 40px -24px rgba(0,0,0,.95);border:1px solid var(--ligne-douce);width:100%;aspect-ratio:16/9;object-fit:cover;background:rgba(10,25,47,.55)}
+.ph img{border-radius:11px;box-shadow:0 20px 40px -24px rgba(0,0,0,.95);border:1px solid var(--ligne-douce)}
 .ph figcaption{font-family:var(--mono);font-size:.68rem;color:var(--muted);margin-top:9px}
 .duo{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
 
@@ -664,6 +657,21 @@ table.mat td.err{color:var(--rouge)}
     font-family:var(--mono);font-size:.7rem;color:var(--ambre)}
   #stage .niv .pt{width:7px;height:7px;border-radius:50%;background:var(--ambre)}
   #stage .cle{font-family:var(--mono);font-size:.9rem;color:var(--cyan)}
+  #stage .logo-chip{display:inline-flex;align-items:center;background:#fff;border-radius:8px;padding:5px 9px}
+  #stage .logo-chip img{height:24px;width:auto}
+  #stage .stage-list{display:flex;flex-direction:column;gap:22px}
+  #stage .stage-list .carte{width:100%}
+  #stage figure.ph{margin:16px 0 0}
+  #stage figure.ph img{max-height:440px;width:auto;max-width:100%;margin-inline:auto}
+  #stage figure.ph figcaption{text-align:center}
+  #stage figure.ph.banner{margin:6px 0 26px}
+  #stage figure.ph.banner img{width:100%;height:300px;object-fit:cover;max-height:none;margin:0}
+  #stage figure.ph.banner figcaption{text-align:left}
+  #stage .shots{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+  #stage .shots figure.ph{margin:0}
+  #stage .shots figure.ph img{width:100%;height:300px;object-fit:cover;max-height:none;margin:0}
+  #stage .shots figure.ph figcaption{text-align:left}
+  @media(max-width:680px){#stage .shots{grid-template-columns:1fr}#stage .shots figure.ph img{height:auto}}
 </style>
 <section class="section alt" id="stage">
   <div class="wrap">
@@ -674,6 +682,7 @@ table.mat td.err{color:var(--rouge)}
     </div>
 
     <div class="stage-meta" data-reveal>
+      <span class="logo-chip"><img src="img/ADP_paris.png" alt="Paris Aéroport"></span>
       <span><b>Entreprise</b> · CEGRI SAS</span>
       <span><b>Site</b> · ADP Orly, hangar de réserve</span>
       <span><b>Période</b> · 13 avr. au 17 juil. 2026</span>
@@ -681,7 +690,9 @@ table.mat td.err{color:var(--rouge)}
       <span><b>Habilitation</b> · B1V, travail sous tension au voisinage</span>
     </div>
 
-    <div class="grille-savoir">
+    <figure class="ph banner" data-reveal><img src="img/WhatsApp_Image_2026-08-26_at_12_23_26__1_.jpeg" alt="Zone hangar, tirage de câbles à la nacelle"><figcaption>Zone hangar, tirage de câbles en hauteur à la nacelle élévatrice, dossier de plans au sol.</figcaption></figure>
+
+    <div class="stage-list">
 
       <div class="carte" data-reveal style="--d:.04s">
         <h3><span class="rep">01</span>Boucle SSI, reprise complète</h3>
@@ -692,6 +703,8 @@ table.mat td.err{color:var(--rouge)}
           <p>Test de continuité au multimètre en mode sonnette, câble par câble, jusqu'à repérer chaque arrivée dans chaque boîte. J'ai identifié les paires du bus de données HI et LO et l'alimentation 12 V, reconstitué la chaîne série sans interruption, puis remis en place la résistance de fin de ligne pour rétablir la surveillance par courant de repos.</p></div>
         <div class="bloc"><span class="lb">Résultat</span>
           <p>Boucle fermée aller-retour rétablie, plus aucun défaut à la centrale, tolérance de rupture de câble de nouveau garantie par le rebouclage.</p></div>
+        <figure class="ph"><img src="img/WhatsApp_Image_2026-08-26_at_12_23_27__1_.jpeg" alt="Schéma de la boucle SSI aller-retour"><figcaption>Topologie de la boucle fermée, ligne aller Loop-In et ligne retour Loop-Out.</figcaption></figure>
+        <figure class="ph"><img src="img/WhatsApp_Image_2026-08-26_at_12_23_28.jpeg" alt="Carte SSI, borniers BUS et résistance de fin de ligne"><figcaption>Raccordement conforme, borniers BUS 1 et BUS 2, résistance de fin de ligne en place.</figcaption></figure>
         <span class="niv"><span class="pt"></span>C2 Vérifier · maîtrise confirmée</span>
       </div>
 
@@ -716,6 +729,11 @@ table.mat td.err{color:var(--rouge)}
           <p>Pour éliminer tout risque de croisement entre le foyer A et le foyer B, j'ai appliqué une convention de repérage par couleur au tirage sous gaine ICTA : navettes et retour de lampe orange pour le circuit A, violet pour le circuit B. Le montage reste lisible pour la personne qui reprendra derrière moi.</p></div>
         <div class="bloc"><span class="lb">Résultat</span>
           <p>Deux commandes indépendantes fonctionnelles, câblage conforme NF C 15-100, aucun croisement de navettes.</p></div>
+        <figure class="ph"><img src="img/double.JPG" alt="Schéma développé du double va-et-vient"><figcaption>Schéma développé, deux circuits indépendants, navettes orange pour A et violet pour B.</figcaption></figure>
+        <div class="shots">
+          <figure class="ph"><img src="img/WhatsApp_Image_2026-08-26_at_12_23_26.jpeg" alt="Plan électrique de la zone tertiaire TD-B3.5"><figcaption>Plan de la zone tertiaire, tableau divisionnaire TD-B3.5.</figcaption></figure>
+          <figure class="ph"><img src="img/WhatsApp_Image_2026-08-26_at_12_23_27.jpeg" alt="Câblage terminal d'un va-et-vient"><figcaption>Câblage terminal dans la boîte, navettes repérées.</figcaption></figure>
+        </div>
         <span class="niv"><span class="pt"></span>C4 Implanter · maîtrise professionnelle</span>
       </div>
 
@@ -728,6 +746,11 @@ table.mat td.err{color:var(--rouge)}
           <p>Pose des peignes d'alimentation, équilibrage des phases pour limiter le déséquilibre et le courant de neutre, confection des torons, raccordement sur borniers étagés repérés de D1 à D21. Départs dédiés protégés, dont un départ sur étiquette rouge pour la centrale SSI et le parafoudre en tête d'installation.</p></div>
         <div class="bloc"><span class="lb">Résultat</span>
           <p>Armoire propre, repérée, contrôlable. Chaque départ retrouvable au plan, ce qui change tout pour la maintenance future.</p></div>
+        <div class="shots">
+          <figure class="ph"><img src="img/armoire_td.jpeg" alt="Armoire de distribution générale"><figcaption>Armoire générale, disjoncteur général, automate GTB et départs.</figcaption></figure>
+          <figure class="ph"><img src="img/armoir_cablage.jpeg" alt="Borniers étagés repérés D2 à D21"><figcaption>Borniers étagés, repérage numéroté D2 à D21, torons terre séparés.</figcaption></figure>
+        </div>
+        <figure class="ph"><img src="img/WhatsApp_Image_2026-08-26_at_12_23_26__5_.jpeg" alt="Coffret modulaire, départs protégés et repérés"><figcaption>Coffret modulaire, départs repérés, protection TBS, télécommande des blocs de secours et portes sectionnelles.</figcaption></figure>
         <span class="niv"><span class="pt"></span>C1 Concevoir + C4 Implanter · autonomie terrain</span>
       </div>
 
@@ -831,7 +854,6 @@ table.mat td.err{color:var(--rouge)}
 <footer>
   <div class="wrap">
     <p>Portfolio de soutenance BUT GEII ESE · IUT de Troyes, URCA · 2026 · Codé à la main, sans gabarit</p>
-    <p style="margin-top:9px;opacity:.6">version 3 · photos toutes extensions</p>
     <p style="margin-top:9px"><kbd>Z</kbd> <kbd>S</kbd> <kbd>Q</kbd> <kbd>D</kbd> pilotent le HUD · <kbd>C</kbd> ouvre la matrice · <kbd>Échap</kbd> ferme</p>
   </div>
 </footer>
@@ -956,25 +978,7 @@ const ICONES = {
   volant:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v6M4.5 17l5-3M19.5 17l-5-3"/></svg>'
 };
 
-const PH = (t, f) => '<figure class="ph"><img data-ph="'+f+'" src="img/'+f+'.jpg" alt="'+t+'" loading="lazy"><figcaption>'+t+'</figcaption></figure>';
-
-/* On essaie toutes les extensions courantes, majuscules comprises, car
-   GitHub Pages distingue la casse. Si aucune ne repond, on affiche un
-   cadre en pointilles rappelant le nom de fichier attendu. */
-const EXT = ['.jpg','.JPG','.jpeg','.JPEG','.png','.PNG','.webp','.WEBP'];
-function photos(zone){
-  zone.querySelectorAll('img[data-ph]').forEach(im=>{
-    const nom = im.dataset.ph;
-    let i = 0;
-    const rate = () => {
-      i++;
-      if(i < EXT.length){ im.src = 'img/'+nom+EXT[i]; return; }
-      im.outerHTML = '<div class="ph-box"><span>PHOTO MANQUANTE<br>déposer img/'+nom+'.jpg</span></div>';
-    };
-    im.addEventListener('error', rate);
-    if(im.complete && im.naturalWidth===0) rate();
-  });
-}
+const PH = (t) => '<figure class="ph"><div class="ph-box"><span>PHOTO · '+t+'<br>remplacer par &lt;img src="img/…"&gt;</span></div><figcaption>'+t+'</figcaption></figure>';
 
 const PROJETS = [
 {
@@ -1013,7 +1017,7 @@ Point P1 = sol(<span class="nb">-0.55f</span> + delta*<span class="nb">0.15f</sp
 Point P2 = sol(<span class="nb">-0.55f</span> + delta*<span class="nb">0.90f</span>, <span class="nb">1.0f</span>);
 <span class="kw">for</span> (<span class="kw">float</span> t = <span class="nb">0</span>; t &lt;= <span class="nb">1</span>; t += <span class="nb">0.02f</span>)
     trace(bezier(P0, P1, P2, t));</code></pre>
-    <div class="duo" style="margin-top:22px">`+PH('HUD en fonctionnement sur le flux caméra','camera-hud')+PH('Voiture RC instrumentée, Raspberry Pi et caméra','camera-voiture')+`</div>
+    <div class="duo" style="margin-top:22px">`+PH('HUD en fonctionnement sur le flux caméra')+PH('Voiture RC instrumentée, Raspberry Pi et caméra')+`</div>
   `
 },
 {
@@ -1079,7 +1083,7 @@ argb32 &lt;= x<span class="nb">"FF"</span> &amp; r8 &amp; g8 &amp; b8;</code></p
 SOCFPGA_CYCLONE5 # <span class="kw">saveenv</span>
 SOCFPGA_CYCLONE5 # <span class="kw">reset</span>
 <span class="cm"># Linux s arrete a 0x2FFFFFFF, le FPGA ecrit au dessus sans collision</span></code></pre>
-    <div class="duo" style="margin-top:22px">`+PH('Flux caméra affiché par l\'application Qt','fpga-qt')+PH('Banc DE10-Nano avec la caméra OV7670','fpga-banc')+`</div>
+    <div class="duo" style="margin-top:22px">`+PH('Flux caméra affiché par l\'application Qt')+PH('Banc DE10-Nano avec la caméra OV7670')+`</div>
   `
 },
 {
@@ -1119,7 +1123,7 @@ t = np.sqrt((mu20 - mu02)**<span class="nb">2</span> + <span class="nb">4</span>
 L = np.sqrt(<span class="nb">8</span>*(mu20 + mu02 + t))   <span class="cm"># longueur</span>
 W = np.sqrt(<span class="nb">8</span>*(mu20 + mu02 - t))   <span class="cm"># largeur</span>
 ratio = L / W                    <span class="cm"># 1.0 pour un cercle parfait</span></code></pre>
-    <div class="duo" style="margin-top:22px">`+PH('Calibration du masque et zone d\'intérêt','vision-calibration')+PH('Banc d\'essai : Raspberry Pi, caméra, jetons','vision-banc')+`</div>
+    <div class="duo" style="margin-top:22px">`+PH('Calibration du masque et zone d\'intérêt')+PH('Banc d\'essai : Raspberry Pi, caméra, jetons')+`</div>
   `
 },
 {
@@ -1143,7 +1147,7 @@ ratio = L / W                    <span class="cm"># 1.0 pour un cercle parfait</
     {v:'2',l:'couches de routage'}
   ],
   html:`
-    <div class="duo" style="margin-top:6px">`+PH('Robot et balise en configuration de match','robot-match')+PH('Schéma et routage KiCad de la carte moteur','robot-kicad')+`</div>
+    <div class="duo" style="margin-top:6px">`+PH('Robot et balise en configuration de match')+PH('Schéma et routage KiCad de la carte moteur')+`</div>
   `
 },
 {
@@ -1164,7 +1168,7 @@ ratio = L / W                    <span class="cm"># 1.0 pour un cercle parfait</
     {v:'MQTT',l:'supervision temps réel'},
     {v:'3',l:'équipiers, 3 lots'}
   ],
-  html:`<div class="duo" style="margin-top:6px">`+PH('Robot en équilibre et interface de supervision','balancing-robot')+PH('Schéma du réseau local du projet','balancing-reseau')+`</div>`
+  html:`<div class="duo" style="margin-top:6px">`+PH('Robot en équilibre et interface de supervision')+PH('Schéma du réseau local du projet')+`</div>`
 },
 {
   id:'temperature', cat:['carte'], ic:'chaud', annee:'2023', maitrise:2,
@@ -1189,7 +1193,7 @@ ratio = L / W                    <span class="cm"># 1.0 pour un cercle parfait</
   html:`
     <h4>Procédure de vérification</h4>
     <p class="muted" style="font-size:.93rem">À chaque carte soudée, la même méthode : injection des valeurs d'entrée par la carte de test, lecture des tensions et courants de sortie, comparaison au calcul théorique, puis relevé à l'oscilloscope des seuils de basculement. Toute carte non conforme est reprise avant assemblage.</p>
-    <div class="duo" style="margin-top:18px">`+PH('Les sept cartes assemblées en fin de projet','temperature-cartes')+PH('Relevé oscilloscope des tensions de seuil','temperature-oscillo')+`</div>
+    <div class="duo" style="margin-top:18px">`+PH('Les sept cartes assemblées en fin de projet')+PH('Relevé oscilloscope des tensions de seuil')+`</div>
   `
 },
 {
@@ -1208,7 +1212,7 @@ ratio = L / W                    <span class="cm"># 1.0 pour un cercle parfait</
     {v:'PID',l:'boucle fermée'},
     {v:'Hall',l:'mesure de position'}
   ],
-  html:`<div class="duo" style="margin-top:6px">`+PH('Kart instrumenté et carte de commande','kart-carte')+`</div>`
+  html:`<div class="duo" style="margin-top:6px">`+PH('Kart instrumenté et carte de commande')+`</div>`
 }
 ];
 
@@ -1258,7 +1262,6 @@ function ouvrirProjet(id){
     ${p.chiffres?`<h4>Chiffres</h4><div class="chiffres">${p.chiffres.map(c=>`<div class="chiffre"><b>${c.v}</b><span>${c.l}</span></div>`).join('')}</div>`:''}
     ${p.html||''}
   `;
-  photos(fiche);
   voile.classList.add('ouvert');
   document.body.classList.add('bloque');
   voile.scrollTop = 0;
