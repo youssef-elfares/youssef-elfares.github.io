@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Youssef EL FARES · Systèmes embarqués · BUT GEII ESE</title>
-<meta name="description" content="Portfolio de soutenance BUT GEII spécialité Électronique et Systèmes Embarqués. FPGA Cyclone V, vision embarquée, C++, VHDL, terrain CFO/CFA.">
+<title>Youssef EL FARES · Systèmes électroniques embarqués</title>
+<meta name="description" content="Youssef EL FARES, ingénieur en systèmes électroniques embarqués en formation à Mines Saint-Étienne. Projets FPGA, vision embarquée, C++, VHDL et électronique de carte.">
 
 <!--
   ============================================================
@@ -40,18 +40,19 @@
 <style>
 /* ============ 1. JETONS DE STYLE ============ */
 :root{
-  --nuit:#0A192F;
-  --nuit-2:#071327;
-  --surface:#112240;
-  --surface-hi:#16305C;
-  --texte:#CCD6F6;
-  --muted:#8892B0;
-  --cyan:#64FFDA;
-  --ambre:#FFB86B;
-  --rouge:#FF5C6C;
-  --indigo:#6C63FF;
-  --ligne:rgba(100,255,218,.16);
-  --ligne-douce:rgba(204,214,246,.10);
+  --nuit:#FFFFFF;
+  --nuit-2:#F5F7FA;
+  --surface:#FFFFFF;
+  --surface-hi:#EDF1F7;
+  --texte:#141C28;
+  --muted:#59647A;
+  --cyan:#0F4C81;
+  --ambre:#8A4B00;
+  --rouge:#B3261E;
+  --indigo:#3F3BC4;
+  --ligne:rgba(20,28,40,.14);
+  --ligne-douce:rgba(20,28,40,.08);
+  --ombre:0 1px 2px rgba(20,28,40,.05), 0 6px 20px rgba(20,28,40,.06);
   --display:'Space Grotesk','Segoe UI',system-ui,sans-serif;
   --corps:'Inter','Segoe UI',system-ui,sans-serif;
   --mono:'JetBrains Mono','Consolas','Courier New',monospace;
@@ -109,7 +110,7 @@ p{margin:0 0 1rem}
 /* ============ 3. NAVIGATION ============ */
 .nav{
   position:fixed;inset:0 0 auto 0;height:var(--nav-h);z-index:60;
-  background:rgba(10,25,47,.82);backdrop-filter:blur(14px);
+  background:rgba(255,255,255,.82);backdrop-filter:blur(14px);
   border-bottom:1px solid var(--ligne-douce);
   display:flex;align-items:center
 }
@@ -121,7 +122,7 @@ p{margin:0 0 1rem}
   font-family:var(--mono);font-size:.76rem;color:var(--muted);padding:8px 11px;border-radius:8px;
   transition:color .2s,background .2s;white-space:nowrap
 }
-.nav-liens a:hover{color:var(--cyan);background:rgba(100,255,218,.07)}
+.nav-liens a:hover{color:var(--cyan);background:rgba(15,76,129,.07)}
 .nav-liens a.actif{color:var(--cyan)}
 .nav-liens a .num{opacity:.55;margin-right:5px}
 .chrono{
@@ -135,7 +136,7 @@ p{margin:0 0 1rem}
   width:28px;height:28px;border-radius:50%;display:grid;place-items:center;color:var(--muted);
   transition:color .2s,background .2s
 }
-.chrono button:hover{color:var(--cyan);background:rgba(100,255,218,.1)}
+.chrono button:hover{color:var(--cyan);background:rgba(15,76,129,.1)}
 .chrono svg{width:13px;height:13px;fill:currentColor}
 .burger{display:none;margin-left:auto;width:40px;height:40px;border-radius:10px;color:var(--cyan)}
 .burger svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8}
@@ -157,7 +158,7 @@ p{margin:0 0 1rem}
 .puces{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 26px;padding:0;list-style:none}
 .puces li{
   font-family:var(--mono);font-size:.73rem;color:var(--texte);
-  border:1px solid var(--ligne-douce);border-radius:999px;padding:6px 13px;background:rgba(17,34,64,.5)
+  border:1px solid var(--ligne-douce);border-radius:999px;padding:6px 13px;background:rgba(237,241,247,.5)
 }
 .puces li::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--cyan);margin-right:8px;vertical-align:1px}
 .puces li.terrain::before{background:var(--ambre)}
@@ -167,27 +168,27 @@ p{margin:0 0 1rem}
   padding:13px 22px;border-radius:10px;border:1px solid var(--cyan);color:var(--cyan);
   transition:background .2s,transform .2s,box-shadow .2s
 }
-.btn:hover{background:rgba(100,255,218,.09);transform:translateY(-2px);box-shadow:0 10px 24px -14px var(--cyan)}
-.btn.plein{background:var(--cyan);color:#06253f;font-weight:600}
-.btn.plein:hover{background:#7dffe4;box-shadow:0 14px 30px -14px var(--cyan)}
+.btn:hover{background:rgba(15,76,129,.09);transform:translateY(-2px);box-shadow:0 10px 24px -14px var(--cyan)}
+.btn.plein{background:var(--cyan);color:#fff;font-weight:600;border-color:var(--cyan)}
+.btn.plein:hover{background:#0C3E6B;box-shadow:0 10px 24px -12px rgba(15,76,129,.55)}
 .btn svg{width:15px;height:15px;fill:currentColor}
 
 /* ---- HUD signature ---- */
 .hud-bloc{position:relative}
 .hud-cadre{
   border:1px solid var(--ligne);border-radius:var(--r);overflow:hidden;
-  background:#0c1526;box-shadow:0 30px 60px -30px rgba(0,0,0,.9),0 0 0 1px rgba(255,255,255,.02) inset
+  background:#0c1526;box-shadow:0 30px 60px -30px rgba(0,0,0,.9),0 0 0 1px rgba(20,28,40,.02) inset
 }
 .hud-barre{
   display:flex;align-items:center;gap:8px;padding:9px 13px;border-bottom:1px solid var(--ligne-douce);
-  font-family:var(--mono);font-size:.68rem;color:var(--muted);letter-spacing:.06em;background:rgba(17,34,64,.75)
+  font-family:var(--mono);font-size:.68rem;color:var(--muted);letter-spacing:.06em;background:rgba(237,241,247,.75)
 }
 .led{width:8px;height:8px;border-radius:50%;background:var(--cyan);flex:none;box-shadow:0 0 8px var(--cyan)}
 .hud-barre .droite{margin-left:auto;color:var(--cyan)}
 #hud{display:block;width:100%;height:auto;aspect-ratio:16/10;background:#161b22;touch-action:manipulation}
 .hud-pied{
   display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:11px 13px;
-  border-top:1px solid var(--ligne-douce);background:rgba(17,34,64,.75)
+  border-top:1px solid var(--ligne-douce);background:rgba(237,241,247,.75)
 }
 .hud-pied .form{font-family:var(--mono);font-size:.7rem;color:var(--muted)}
 .hud-pied .form b{color:var(--cyan);font-weight:400}
@@ -215,9 +216,14 @@ input[type=range]::-moz-range-thumb{width:15px;height:15px;border-radius:50%;bac
   background:var(--surface);border:1px solid var(--ligne-douce);border-radius:var(--r);
   padding:24px 22px;transition:border-color .25s,transform .25s
 }
-.carte:hover{border-color:var(--ligne)}
+.carte{box-shadow:var(--ombre)}
+.carte:hover{border-color:var(--cyan);box-shadow:0 2px 4px rgba(20,28,40,.06),0 10px 30px rgba(20,28,40,.10)}
 .carte h3{margin-bottom:4px}
 .carte .st{font-family:var(--mono);font-size:.68rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:18px}
+.faire{margin-bottom:14px;padding-bottom:13px;border-bottom:1px solid var(--ligne)}
+.faire:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
+.faire .nom{font-size:.92rem;display:block;margin-bottom:4px}
+.faire p{font-size:.845rem;color:var(--muted);line-height:1.52;margin:0}
 .skill{margin-bottom:15px}
 .skill:last-child{margin-bottom:0}
 .skill .haut{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:6px}
@@ -225,7 +231,7 @@ input[type=range]::-moz-range-thumb{width:15px;height:15px;border-radius:50%;bac
 .skill .niv{font-family:var(--mono);font-size:.64rem;color:var(--muted);letter-spacing:.06em;white-space:nowrap}
 .bargraph{display:flex;gap:3px}
 .bargraph i{
-  flex:1;height:6px;border-radius:1px;background:rgba(204,214,246,.12);
+  flex:1;height:6px;border-radius:1px;background:rgba(20,28,40,.12);
   transform:scaleY(.5);transform-origin:bottom;transition:transform .5s cubic-bezier(.2,.8,.3,1),background .5s
 }
 .vu .bargraph i.plein{transform:scaleY(1);background:var(--cyan)}
@@ -235,10 +241,10 @@ input[type=range]::-moz-range-thumb{width:15px;height:15px;border-radius:50%;bac
 }
 .tag{
   font-family:var(--mono);font-size:.7rem;color:var(--muted);border:1px solid var(--ligne-douce);
-  border-radius:6px;padding:5px 10px;background:rgba(10,25,47,.5)
+  border-radius:6px;padding:5px 10px;background:rgba(255,255,255,.5)
 }
 .tag.cy{color:var(--cyan);border-color:var(--ligne)}
-.tag.am{color:var(--ambre);border-color:rgba(255,184,107,.28)}
+.tag.am{color:var(--ambre);border-color:rgba(138,75,0,.28)}
 
 /* ============ 6. PROJETS ============ */
 .filtres{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px}
@@ -255,24 +261,24 @@ input[type=range]::-moz-range-thumb{width:15px;height:15px;border-radius:50%;bac
   transform-style:preserve-3d;transition:box-shadow .3s,border-color .3s,opacity .3s;
   display:flex;flex-direction:column;gap:12px;min-height:236px
 }
-.projet:hover{border-color:var(--ligne);box-shadow:0 26px 46px -28px rgba(2,12,27,1),0 0 30px -20px var(--cyan)}
+.projet:hover{border-color:var(--ligne);box-shadow:0 26px 46px -28px rgba(255,255,255,1),0 0 30px -20px var(--cyan)}
 .projet.masque{display:none}
 .projet .rang{
   display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:.68rem;color:var(--muted)
 }
 .projet .rang .annee{margin-left:auto}
-.projet .ic{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;background:rgba(100,255,218,.09);color:var(--cyan);flex:none}
+.projet .ic{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;background:rgba(15,76,129,.09);color:var(--cyan);flex:none}
 .projet .ic svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-.projet.terrain .ic{background:rgba(255,184,107,.1);color:var(--ambre)}
+.projet.terrain .ic{background:rgba(138,75,0,.1);color:var(--ambre)}
 .projet h3{margin-bottom:2px}
 .projet .desc{font-size:.9rem;color:var(--muted);margin:0}
 .projet .mots{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
-.projet .mots span{font-family:var(--mono);font-size:.66rem;color:var(--muted);background:rgba(10,25,47,.65);border-radius:5px;padding:4px 8px}
+.projet .mots span{font-family:var(--mono);font-size:.66rem;color:var(--muted);background:rgba(255,255,255,.65);border-radius:5px;padding:4px 8px}
 .projet .ouvrir{font-family:var(--mono);font-size:.7rem;color:var(--cyan);display:flex;align-items:center;gap:7px}
 .projet .ouvrir svg{width:12px;height:12px;fill:currentColor;transition:transform .25s}
 .projet:hover .ouvrir svg{transform:translateX(4px)}
 .maitrise{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.66rem;color:var(--muted)}
-.maitrise i{width:16px;height:4px;border-radius:1px;background:rgba(204,214,246,.16)}
+.maitrise i{width:16px;height:4px;border-radius:1px;background:rgba(20,28,40,.16)}
 .maitrise i.on{background:var(--cyan)}
 .projet.terrain .maitrise i.on{background:var(--ambre)}
 
@@ -294,7 +300,7 @@ input[type=range]::-moz-range-thumb{width:15px;height:15px;border-radius:50%;bac
 .etape li{margin-bottom:7px;font-size:.94rem}
 .etape li::marker{color:var(--ambre)}
 .encadre{
-  border-left:2px solid var(--ambre);background:rgba(255,184,107,.06);border-radius:0 10px 10px 0;
+  border-left:2px solid var(--ambre);background:rgba(138,75,0,.06);border-radius:0 10px 10px 0;
   padding:16px 18px;margin:14px 0 4px
 }
 .encadre .t{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ambre);margin-bottom:7px}
@@ -303,14 +309,14 @@ input[type=range]::-moz-range-thumb{width:15px;height:15px;border-radius:50%;bac
 /* ============ 8. BANDEAU COMPETENCES ============ */
 .bandeau{
   border:1px solid var(--ligne);border-radius:18px;background:
-    linear-gradient(135deg,rgba(100,255,218,.07),rgba(108,99,255,.09));
+    linear-gradient(135deg,rgba(15,76,129,.07),rgba(108,99,255,.09));
   padding:clamp(28px,4vw,46px);display:grid;grid-template-columns:minmax(0,1fr) auto;
   gap:26px;align-items:center
 }
 .bandeau .quatre{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
 .bandeau .quatre span{
   font-family:var(--mono);font-size:.72rem;color:var(--texte);border:1px solid var(--ligne);
-  border-radius:8px;padding:7px 13px;background:rgba(10,25,47,.45)
+  border-radius:8px;padding:7px 13px;background:rgba(255,255,255,.45)
 }
 
 /* ============ 9. CONTACT ============ */
@@ -331,7 +337,7 @@ footer kbd{
 
 /* ============ 10. FENETRES ============ */
 .voile{
-  position:fixed;inset:0;z-index:80;background:rgba(4,10,22,.86);backdrop-filter:blur(6px);
+  position:fixed;inset:0;z-index:80;background:rgba(20,28,40,.48);backdrop-filter:blur(6px);
   display:none;padding:24px;overflow-y:auto;overscroll-behavior:contain
 }
 .voile.ouvert{display:block}
@@ -358,35 +364,35 @@ footer kbd{
 .fiche li{margin-bottom:8px;font-size:.96rem}
 .fiche li::marker{color:var(--cyan)}
 .chiffres{display:grid;grid-template-columns:repeat(auto-fit,minmax(128px,1fr));gap:12px;margin:6px 0 4px}
-.chiffre{background:rgba(10,25,47,.6);border:1px solid var(--ligne-douce);border-radius:11px;padding:15px}
+.chiffre{background:rgba(255,255,255,.6);border:1px solid var(--ligne-douce);border-radius:11px;padding:15px}
 .chiffre b{display:block;font-family:var(--display);font-size:1.55rem;color:var(--cyan);line-height:1.1}
 .chiffre span{font-family:var(--mono);font-size:.64rem;color:var(--muted);letter-spacing:.05em}
 pre{
-  background:#0b1830;border:1px solid var(--ligne-douce);border-left:2px solid var(--cyan);
+  background:#F7F9FC;border:1px solid var(--ligne);border-left:2px solid var(--cyan);
   border-radius:0 10px 10px 0;padding:16px 18px;overflow-x:auto;margin:0
 }
-code{font-family:var(--mono);font-size:.79rem;color:#a8c4ea;line-height:1.75}
-code .kw{color:var(--cyan)}
-code .cm{color:#5c7099;font-style:italic}
+code{font-family:var(--mono);font-size:.79rem;color:#243044;line-height:1.75}
+code .kw{color:var(--cyan);font-weight:600}
+code .cm{color:#6B7688;font-style:italic}
 code .nb{color:var(--ambre)}
 table.mat{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:.76rem;margin:4px 0}
 table.mat th,table.mat td{border:1px solid var(--ligne-douce);padding:9px 11px;text-align:center}
 table.mat th{color:var(--muted);font-weight:400;letter-spacing:.05em}
-table.mat td.diag{color:var(--cyan);background:rgba(100,255,218,.07)}
+table.mat td.diag{color:var(--cyan);background:rgba(15,76,129,.07)}
 table.mat td.err{color:var(--rouge)}
 .ph{margin:0}
 .ph-box{
   border:1px dashed var(--ligne-douce);border-radius:11px;aspect-ratio:16/9;display:grid;place-items:center;
-  background:rgba(10,25,47,.55);padding:16px;text-align:center
+  background:rgba(255,255,255,.55);padding:16px;text-align:center
 }
 .ph-box span{font-family:var(--mono);font-size:.7rem;color:var(--muted)}
-.ph img{border-radius:11px;box-shadow:0 20px 40px -24px rgba(0,0,0,.95);border:1px solid var(--ligne-douce);width:100%;aspect-ratio:16/9;object-fit:cover;background:rgba(10,25,47,.55)}
+.ph img{border-radius:11px;box-shadow:0 20px 40px -24px rgba(0,0,0,.95);border:1px solid var(--ligne-douce);width:100%;aspect-ratio:16/9;object-fit:cover;background:rgba(255,255,255,.55)}
 .ph figcaption{font-family:var(--mono);font-size:.68rem;color:var(--muted);margin-top:9px}
 .duo{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
 
 /* ---- diagramme SoC ---- */
-.soc{width:100%;height:auto;border:1px solid var(--ligne-douce);border-radius:11px;background:rgba(10,25,47,.55)}
-.soc .bloc{fill:rgba(17,34,64,.9);stroke:var(--ligne-douce)}
+.soc{width:100%;height:auto;border:1px solid var(--ligne-douce);border-radius:11px;background:rgba(255,255,255,.55)}
+.soc .bloc{fill:rgba(237,241,247,.9);stroke:var(--ligne-douce)}
 .soc .txt{font-family:var(--mono);font-size:9px;fill:var(--texte)}
 .soc .txt.pt{font-size:7.5px;fill:var(--muted)}
 .soc .fil{stroke:var(--ligne-douce);stroke-width:1;fill:none}
@@ -405,7 +411,7 @@ table.mat td.err{color:var(--rouge)}
 .page-comp.ouvert{display:block;animation:fondu .3s ease}
 @keyframes fondu{from{opacity:0}to{opacity:1}}
 .comp-tete{
-  position:sticky;top:0;z-index:2;background:rgba(10,25,47,.94);backdrop-filter:blur(12px);
+  position:sticky;top:0;z-index:2;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);
   border-bottom:1px solid var(--ligne);padding:16px 0
 }
 .comp-tete .wrap{display:flex;align-items:center;gap:16px}
@@ -447,7 +453,7 @@ table.mat td.err{color:var(--rouge)}
 @media (max-width:780px){
   .nav-liens{
     position:fixed;top:var(--nav-h);left:0;right:0;flex-direction:column;align-items:stretch;
-    background:rgba(7,19,39,.98);border-bottom:1px solid var(--ligne);padding:10px 5vw 18px;
+    background:rgba(255,255,255,.98);border-bottom:1px solid var(--ligne);padding:10px 5vw 18px;
     gap:2px;display:none;margin-left:0
   }
   .nav-liens.ouvert{display:flex}
@@ -545,7 +551,7 @@ table.mat td.err{color:var(--rouge)}
           <div class="hud-barre">
             <span class="led"></span>
             <span>CAMERA DE RECUL · RASPBERRY PI 4 · TCP/IP</span>
-            <span class="droite" id="hud-etat">LIVE</span>
+            <span class="droite" id="hud-etat">Démo interactive</span>
           </div>
           <canvas id="hud" width="800" height="500" tabindex="0"
                   aria-label="Simulation interactive du HUD de recul, pilotable au clavier"></canvas>
@@ -574,53 +580,49 @@ table.mat td.err{color:var(--rouge)}
 <section class="section alt" id="savoir-faire">
   <div class="wrap">
     <div class="tete" data-reveal>
-      <div class="eyebrow"><span class="trait"></span>Étape 01 · Bilan <span class="budget">45 s</span></div>
-      <h2>Qu'est-ce que je sais faire</h2>
-      <p class="lead muted">Trois familles d'outils que j'utilise moi même sur des cartes réelles, pas seulement en cours. Le niveau annoncé correspond à ce que je peux refaire seul, aujourd'hui, sans documentation externe.</p>
+      <div class="eyebrow"><span class="trait"></span>Étape 01 · Bilan</div>
+      <h2>Ce que je sais faire, concrètement</h2>
+      <p class="lead muted">Pas de niveau auto-évalué ni de barre de progression : ces repères ne veulent rien dire. Voici les gestes techniques que j'ai réellement pratiqués, en BUT GEII et sur mes projets, avec leurs limites.</p>
     </div>
 
     <div class="grille-savoir">
       <div class="carte" data-reveal style="--d:.05s">
-        <h3>Langages</h3>
-        <p class="st">Code embarqué et logique</p>
-        <div class="skill"><div class="haut"><span class="nom">C++</span><span class="niv">AUTONOME</span></div><div class="bargraph" data-n="9"></div></div>
-        <div class="skill"><div class="haut"><span class="nom">VHDL</span><span class="niv">AUTONOME</span></div><div class="bargraph" data-n="8"></div></div>
-        <div class="skill"><div class="haut"><span class="nom">Python</span><span class="niv">OPÉRATIONNEL</span></div><div class="bargraph" data-n="7"></div></div>
-        <div class="skill"><div class="haut"><span class="nom">Arduino / C</span><span class="niv">AUTONOME</span></div><div class="bargraph" data-n="8"></div></div>
-        <div class="skill"><div class="haut"><span class="nom">LADDER</span><span class="niv">OPÉRATIONNEL</span></div><div class="bargraph" data-n="6"></div></div>
+        <h3>Programmation et logique</h3>
+        <p class="st">Ce que j'ai écrit et fait tourner</p>
+        <div class="faire"><span class="nom">C et C++</span><p>Microcontrôleurs Raspberry Pi Pico et Arduino : lecture de capteurs, commande de moteurs, liaison série. Application de bureau en Qt sur Raspberry Pi 4.</p></div>
+        <div class="faire"><span class="nom">Python</span><p>Traitement d'image avec NumPy et OpenCV, scripts d'acquisition caméra et dépouillement de mesures.</p></div>
+        <div class="faire"><span class="nom">VHDL</span><p>Description de composants et assemblage sous Quartus Prime et Platform Designer, sur carte DE10-Nano à SoC Cyclone V.</p></div>
+        <div class="faire"><span class="nom">Automate, langage LADDER</span><p>Programmation de séquences et de sécurités en travaux pratiques d'automatisme.</p></div>
       </div>
 
       <div class="carte" data-reveal style="--d:.12s">
-        <h3>Électronique et FPGA</h3>
-        <p class="st">Conception, routage, intégration</p>
-        <div class="skill"><div class="haut"><span class="nom">KiCad et Eagle</span><span class="niv">AUTONOME</span></div><div class="bargraph" data-n="8"></div></div>
-        <div class="skill"><div class="haut"><span class="nom">Quartus Prime, Platform Designer</span><span class="niv">OPÉRATIONNEL</span></div><div class="bargraph" data-n="7"></div></div>
-        <div class="skill"><div class="haut"><span class="nom">Bus I2C et signaux TOR</span><span class="niv">AUTONOME</span></div><div class="bargraph" data-n="8"></div></div>
-        <div class="skill"><div class="haut"><span class="nom">TCP/IP et réseau local</span><span class="niv">OPÉRATIONNEL</span></div><div class="bargraph" data-n="7"></div></div>
-        <div class="skill"><div class="haut"><span class="nom">Mesure, oscilloscope, thermique</span><span class="niv">AUTONOME</span></div><div class="bargraph" data-n="8"></div></div>
+        <h3>Électronique et cartes</h3>
+        <p class="st">Du schéma à la carte qui fonctionne</p>
+        <div class="faire"><span class="nom">KiCad et Eagle</span><p>Saisie de schéma puis routage de cartes <strong>simple face</strong>, jusqu'au typon et à la fabrication. Composants traversants : je n'ai pas fait de multicouche ni de CMS fin.</p></div>
+        <div class="faire"><span class="nom">Câblage et soudure</span><p>Cartes pastillées et cartes gravées au laboratoire, reprise de soudure et dépannage de carte.</p></div>
+        <div class="faire"><span class="nom">Mesure et essais</span><p>Oscilloscope, multimètre, alimentation stabilisée, générateur de fonctions. Relevé de caractéristiques et comparaison au cahier des charges.</p></div>
+        <div class="faire"><span class="nom">Liaisons entre cartes</span><p>I2C, SPI, liaison série et signaux tout ou rien.</p></div>
       </div>
 
       <div class="carte" data-reveal style="--d:.19s">
-        <h3>Systèmes et matériel</h3>
-        <p class="st">Cibles que j'ai fait tourner</p>
-        <div class="skill"><div class="haut"><span class="nom">SoC Cyclone V, DE10-Nano</span><span class="niv">OPÉRATIONNEL</span></div><div class="bargraph" data-n="7"></div></div>
-        <div class="skill"><div class="haut"><span class="nom">Raspberry Pi 4 et Pico</span><span class="niv">AUTONOME</span></div><div class="bargraph" data-n="9"></div></div>
-        <div class="skill"><div class="haut"><span class="nom">Linux embarqué, U-Boot</span><span class="niv">OPÉRATIONNEL</span></div><div class="bargraph" data-n="7"></div></div>
-        <div class="skill"><div class="haut"><span class="nom">Qt Creator, OpenCV</span><span class="niv">OPÉRATIONNEL</span></div><div class="bargraph" data-n="7"></div></div>
-        <div class="skill"><div class="haut"><span class="nom">YOLOv8, Roboflow</span><span class="niv">OPÉRATIONNEL</span></div><div class="bargraph" data-n="6"></div></div>
+        <h3>Systèmes, réseaux et énergie</h3>
+        <p class="st">Faire fonctionner l'ensemble</p>
+        <div class="faire"><span class="nom">Linux embarqué</span><p>Démarrage par U-Boot, paramétrage de la mémoire, accès au matériel depuis une application.</p></div>
+        <div class="faire"><span class="nom">Réseaux</span><p>Adressage IP et TCP/IP, Packet Tracer en travaux pratiques, supervision à distance par MQTT, appairage Zigbee.</p></div>
+        <div class="faire"><span class="nom">Asservissement</span><p>Correcteur PID sur des systèmes réels : vitesse de moteur, équilibre, angle de braquage. Réglage à la mesure plutôt qu'à l'estime.</p></div>
+        <div class="faire"><span class="nom">Électrotechnique</span><p>Distribution, protections, mesure sous tension, mise en service d'équipements. Habilitations B0, B1 et B1V.</p></div>
       </div>
     </div>
 
     <div class="habilit" data-reveal style="--d:.24s">
       <span class="tag am">Habilitations B0, B1, B1V</span>
-      <span class="tag am">CFO et CFA</span>
-      <span class="tag am">Boucle SSI</span>
+      <span class="tag am">Courants forts et faibles</span>
       <span class="tag am">CACES</span>
-      <span class="tag cy">Anglais B2 / C1</span>
+      <span class="tag cy">Anglais B2</span>
       <span class="tag cy">Permis B</span>
       <span class="tag">Jeedom, Zigbee</span>
-      <span class="tag">Packet Tracer</span>
       <span class="tag">MQTT</span>
+      <span class="tag">Packet Tracer</span>
       <span class="tag">Régulation PID</span>
     </div>
   </div>
@@ -630,9 +632,9 @@ table.mat td.err{color:var(--rouge)}
 <section class="section" id="projets">
   <div class="wrap">
     <div class="tete" data-reveal>
-      <div class="eyebrow"><span class="trait"></span>Étape 02 · Projets et manips <span class="budget">2 min</span></div>
+      <div class="eyebrow"><span class="trait"></span>Étape 02 · Projets et manips</div>
       <h2>Ce que j'ai construit</h2>
-      <p class="lead muted">Sept réalisations, de la carte pastillée soudée au maître DMA en VHDL. Ouvrez une carte pour voir le détail technique, les chiffres de validation et le code.</p>
+      <p class="lead muted">Sept réalisations, de la carte soudée au laboratoire à la chaîne vidéo sur FPGA. Ouvrez une carte pour voir le contexte, ce que j'ai fait et le code.</p>
     </div>
 
     <div class="filtres" data-reveal role="group" aria-label="Filtrer les projets">
@@ -651,7 +653,7 @@ table.mat td.err{color:var(--rouge)}
 <style>
   #stage .stage-meta{display:flex;flex-wrap:wrap;gap:10px;margin:2px 0 34px}
   #stage .stage-meta span{font-family:var(--mono);font-size:.72rem;color:var(--texte);
-    border:1px solid var(--ligne-douce);border-radius:999px;padding:6px 13px;background:rgba(17,34,64,.5)}
+    border:1px solid var(--ligne-douce);border-radius:999px;padding:6px 13px;background:rgba(237,241,247,.5)}
   #stage .stage-meta span b{color:var(--cyan);font-weight:600}
   #stage .carte h3{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
   #stage .carte h3 .rep{font-family:var(--mono);font-size:.72rem;color:var(--cyan);
@@ -668,74 +670,34 @@ table.mat td.err{color:var(--rouge)}
 <section class="section alt" id="stage">
   <div class="wrap">
     <div class="tete" data-reveal>
-      <div class="eyebrow"><span class="trait"></span>Étape 03 · Stage de fin d'études <span class="budget">10 min</span></div>
-      <h2>14 semaines en exploitation aéroportuaire</h2>
-      <p class="lead muted">Mon stage BUT3 chez CEGRI SAS, sur le chantier des Aéroports de Paris à Orly. Un hangar de réserve et des locaux tertiaires à équiper de A à Z, en courant fort et courant faible. Je ne détaille pas tout le chantier ici, je m'arrête sur les quatre situations où j'ai vraiment eu à réfléchir, diagnostiquer et décider.</p>
+      <div class="eyebrow"><span class="trait"></span>Étape 03 · Stage de fin d'études</div>
+      <h2>Le terrain électrique</h2>
+      <p class="lead muted">Quatorze semaines chez CEGRI SAS sur le chantier des Aéroports de Paris à Orly, en site occupé. Courants forts et courants faibles, de l'armoire de distribution à la boucle de sécurité incendie.</p>
     </div>
 
     <div class="stage-meta" data-reveal>
       <span><b>Entreprise</b> · CEGRI SAS</span>
-      <span><b>Site</b> · ADP Orly, hangar de réserve</span>
-      <span><b>Période</b> · 13 avr. au 17 juil. 2026</span>
-      <span><b>Tuteur</b> · P. Biffot, directeur général</span>
-      <span><b>Habilitation</b> · B1V, travail sous tension au voisinage</span>
+      <span><b>Site</b> · ADP Orly</span>
+      <span><b>Période</b> · avril à juillet 2026</span>
+      <span><b>Habilitation</b> · B1V</span>
     </div>
 
     <div class="grille-savoir">
-
-      <div class="carte" data-reveal style="--d:.04s">
-        <h3><span class="rep">01</span>Boucle SSI, reprise complète</h3>
-        <p class="st">Sécurité incendie · courant faible adressable</p>
-        <div class="bloc"><span class="lb">La situation</span>
-          <p>À la mise en test, la centrale affichait un défaut majeur de continuité et d'adressage. Des tronçons de la boucle avaient été tirés en dérivation, en étoile, et des polarités du bus de communication étaient croisées entre plusieurs socles.</p></div>
-        <div class="bloc"><span class="lb">Ce que j'ai fait</span>
-          <p>Test de continuité au multimètre en mode sonnette, câble par câble, jusqu'à repérer chaque arrivée dans chaque boîte. J'ai identifié les paires du bus de données HI et LO et l'alimentation 12 V, reconstitué la chaîne série sans interruption, puis remis en place la résistance de fin de ligne pour rétablir la surveillance par courant de repos.</p></div>
-        <div class="bloc"><span class="lb">Résultat</span>
-          <p>Boucle fermée aller-retour rétablie, plus aucun défaut à la centrale, tolérance de rupture de câble de nouveau garantie par le rebouclage.</p></div>
-        <span class="niv"><span class="pt"></span>C2 Vérifier · maîtrise confirmée</span>
+      <div class="carte" data-reveal style="--d:.05s">
+        <h3>Ce que j'ai réalisé</h3>
+        <p class="st">Courants forts et courants faibles</p>
+        <div class="faire"><span class="nom">Distribution</span><p>Équipement de tableaux divisionnaires et du tableau général basse tension : pose d'appareillage, raccordement, repérage et essais.</p></div>
+        <div class="faire"><span class="nom">Installation terminale</span><p>Chemins de câbles, tirage sous gaine, circuits d'éclairage en va-et-vient, câblage conforme à la NF C 15-100.</p></div>
+        <div class="faire"><span class="nom">Mise en service</span><p>Aérothermes triphasés de 15 kW : contrôle des protections, consignation et mesures sous tension.</p></div>
       </div>
 
-      <div class="carte" data-reveal style="--d:.11s">
-        <h3><span class="rep">02</span>Aérotherme 15 kW, inversion évitée</h3>
-        <p class="st">Diagnostic critique · puissance et commande</p>
-        <div class="bloc"><span class="lb">La situation</span>
-          <p>Avant mise sous tension, la télécommande d'un aérotherme triphasé de 15 kW ne répondait pas. Au contrôle point à point entre le coffret de relayage et le boîtier déporté, constat lourd : les signaux de commande en 24 V très basse tension avaient été raccordés sur les départs de tension réseau 400 V, et inversement.</p></div>
-        <div class="bloc"><span class="lb">Ce que j'ai fait</span>
-          <p>J'ai d'abord consigné avec vérification d'absence de tension. Puis déconnexion des liaisons erronées, repérage strict des phases de puissance aux bornes 1L1, 3L2, 5L3 des contacteurs ABB, raccordement de la commande sur les contacts auxiliaires 13NO et 14NO et la bobine, contrôle d'isolement, remise en service validée avec le chef d'équipe.</p></div>
-        <div class="encadre"><div class="t">Pourquoi ça comptait</div>
-          <p>Une mise sous tension directe aurait envoyé du 400 V sur des entrées prévues pour du 24 V. Destruction immédiate des cartes de régulation, et un risque de choc électrique à l'intervention suivante. Ce contrôle a évité les deux.</p></div>
-        <span class="niv"><span class="pt"></span>C3 Maintenir · maîtrise avancée</span>
+      <div class="carte" data-reveal style="--d:.12s">
+        <h3>Deux diagnostics</h3>
+        <p class="st">Les moments où il a fallu chercher</p>
+        <div class="faire"><span class="nom">Boucle de sécurité incendie</span><p>Défaut de continuité et d'adressage sur une boucle SSI. Reprise câble par câble au multimètre, reconstitution de la chaîne série et remise en place de la résistance de fin de ligne. Plus aucun défaut à la centrale.</p></div>
+        <div class="faire"><span class="nom">Inversion 24 V et 400 V</span><p>Un aérotherme ne démarrait pas. Au contrôle point à point entre le coffret et le boîtier déporté, la commande très basse tension était raccordée sur les départs 400 V. Consignation, reprise du câblage, contrôle d'isolement, remise en service validée avec le chef d'équipe.</p></div>
       </div>
-
-      <div class="carte" data-reveal style="--d:.18s">
-        <h3><span class="rep">03</span>Double va-et-vient, zone tertiaire</h3>
-        <p class="st">Éclairage terminal · repérage propre</p>
-        <div class="bloc"><span class="lb">La situation</span>
-          <p>Dans les bureaux et le sas d'accès, il fallait commander deux foyers d'éclairage indépendants depuis deux accès différents. J'ai câblé des circuits en double va-et-vient, donc deux paires de navettes qui passent dans les mêmes boîtes.</p></div>
-        <div class="bloc"><span class="lb">Ce que j'ai fait</span>
-          <p>Pour éliminer tout risque de croisement entre le foyer A et le foyer B, j'ai appliqué une convention de repérage par couleur au tirage sous gaine ICTA : navettes et retour de lampe orange pour le circuit A, violet pour le circuit B. Le montage reste lisible pour la personne qui reprendra derrière moi.</p></div>
-        <div class="bloc"><span class="lb">Résultat</span>
-          <p>Deux commandes indépendantes fonctionnelles, câblage conforme NF C 15-100, aucun croisement de navettes.</p></div>
-        <span class="niv"><span class="pt"></span>C4 Implanter · maîtrise professionnelle</span>
-      </div>
-
-      <div class="carte" data-reveal style="--d:.25s">
-        <h3><span class="rep">04</span>Tableaux divisionnaires et TGBT</h3>
-        <p class="st">Distribution d'énergie · armoires</p>
-        <div class="bloc"><span class="lb">La situation</span>
-          <p>Une grande partie de mon temps a porté sur l'équipement des armoires de distribution, jusqu'au tableau général basse tension qui reçoit l'arrivée 400 V.</p></div>
-        <div class="bloc"><span class="lb">Ce que j'ai fait</span>
-          <p>Pose des peignes d'alimentation, équilibrage des phases pour limiter le déséquilibre et le courant de neutre, confection des torons, raccordement sur borniers étagés repérés de D1 à D21. Départs dédiés protégés, dont un départ sur étiquette rouge pour la centrale SSI et le parafoudre en tête d'installation.</p></div>
-        <div class="bloc"><span class="lb">Résultat</span>
-          <p>Armoire propre, repérée, contrôlable. Chaque départ retrouvable au plan, ce qui change tout pour la maintenance future.</p></div>
-        <span class="niv"><span class="pt"></span>C1 Concevoir + C4 Implanter · autonomie terrain</span>
-      </div>
-
     </div>
-
-    <p class="lead" style="margin-top:34px" data-reveal>
-      <span class="cle">Le fil rouge :</span> sur un site en exploitation, l'erreur ne se rattrape pas après coup. Ce que ce stage m'a appris, c'est la discipline du contrôle avant mise sous tension et du repérage qui parle à celui qui passe après moi.
-    </p>
   </div>
 </section>
 
@@ -743,7 +705,7 @@ table.mat td.err{color:var(--rouge)}
 <section class="section alt" id="terrain">
   <div class="wrap">
     <div class="tete" data-reveal>
-      <div class="eyebrow"><span class="trait"></span>Étape 04 · Expérience terrain <span class="budget">1 min</span></div>
+      <div class="eyebrow"><span class="trait"></span>Étape 04 · Expérience terrain</div>
       <h2>Le chantier, pas seulement le labo</h2>
       <p class="lead muted">Ce qui distingue mon profil : je passe du code au tableau électrique. Quatorze semaines sur un site aéroportuaire en exploitation, avec les contraintes de sécurité qui vont avec.</p>
     </div>
@@ -794,7 +756,7 @@ table.mat td.err{color:var(--rouge)}
   <div class="wrap">
     <div class="bandeau" data-reveal>
       <div>
-        <div class="eyebrow"><span class="trait"></span>Étape 05 · Diplôme <span class="budget">1 min</span></div>
+        <div class="eyebrow"><span class="trait"></span>Étape 05 · Diplôme</div>
         <h2>Matrice des compétences BUT GEII</h2>
         <p class="lead muted" style="margin-top:14px">Chaque compétence du référentiel est reliée à un acte technique précis, daté et vérifiable. La matrice s'ouvre en page pleine, isolée du reste du portfolio, et s'imprime telle quelle.</p>
         <div class="quatre">
@@ -813,7 +775,7 @@ table.mat td.err{color:var(--rouge)}
 <section class="section alt" id="contact">
   <div class="wrap">
     <div class="tete" data-reveal>
-      <div class="eyebrow"><span class="trait"></span>Étape 06 · Suite <span class="budget">15 s</span></div>
+      <div class="eyebrow"><span class="trait"></span>Étape 06 · Suite</div>
       <h2>Disponible en alternance</h2>
       <p class="lead muted">Cycle ingénieur de spécialité électronique à l'ISTP, Mines Saint-Étienne, à partir du 28 septembre 2026. Je cherche une entreprise où l'embarqué se confronte au matériel réel.</p>
     </div>
@@ -830,7 +792,6 @@ table.mat td.err{color:var(--rouge)}
 
 <footer>
   <div class="wrap">
-    <p>Portfolio de soutenance BUT GEII ESE · IUT de Troyes, URCA · 2026 · Codé à la main, sans gabarit</p>
     <p style="margin-top:9px"><kbd>Z</kbd> <kbd>S</kbd> <kbd>Q</kbd> <kbd>D</kbd> pilotent le HUD · <kbd>C</kbd> ouvre la matrice · <kbd>Échap</kbd> ferme</p>
   </div>
 </footer>
@@ -885,7 +846,7 @@ table.mat td.err{color:var(--rouge)}
           <p class="verbe">Valider un système par des essais et des mesures, et prouver sa conformité au cahier des charges.</p>
           <div class="preuve">
             <div class="qui">Vision embarquée · 135 essais</div>
-            <p>Validation statistique d'un algorithme de classification : matrice de confusion sur 135 tests, exactitude de 94,07 %, précision et rappel calculés classe par classe, F1-Score de 0,94, puis courbe ROC pour fixer le seuil de décision par la mesure et non à l'estimation.</p>
+            <p>Validation d'un algorithme de classification par la mesure : 135 essais dépouillés dans une matrice de confusion, 94 % de classifications correctes, et un seuil de décision fixé d'après les relevés plutôt qu'estimé à vue.</p>
           </div>
           <div class="preuve">
             <div class="qui">Régulation de température et chantier Orly</div>
@@ -991,14 +952,14 @@ const PROJETS = [
     "Inférence embarquée à 14 ou 15 images par seconde, seuil de confiance fixé à 0,6 dans le code."
   ],
   chiffres:[
-    {v:'0.954',l:'mAP@50 (masque)'},
-    {v:'0.743',l:'mAP@50-95'},
-    {v:'0.94',l:'F1 max à conf 0,70'},
-    {v:'15',l:'images par seconde'}
+    {v:'Qt / C++',l:'interface temps réel'},
+    {v:'YOLOv8',l:'détection des places'},
+    {v:'Wi-Fi',l:'liaison vidéo à distance'},
+    {v:'Bézier',l:'guides de recul calculés'}
   ],
   html:`
-    <h4>Validation quantitative</h4>
-    <p class="muted" style="font-size:.93rem">Matrice de confusion du détecteur : 19 bonnes détections, 4 sur-détections, 1 place manquée. Pour de la segmentation, ce sont mAP, précision, rappel et F1 qui font foi, pas une courbe ROC.</p>
+    <h4>Ce que valent les résultats</h4>
+    <p class="muted" style="font-size:.93rem">Sur le jeu d'essai : 19 places correctement détectées, 4 détections en trop et 1 place manquée. Les erreurs viennent surtout des places partiellement masquées par le véhicule.</p>
     <table class="mat">
       <tr><th></th><th>Vérité : place</th><th>Vérité : fond</th></tr>
       <tr><th>Prédit place</th><td class="diag">19</td><td class="err">4</td></tr>
@@ -1031,10 +992,10 @@ Point P2 = sol(<span class="nb">-0.55f</span> + delta*<span class="nb">0.90f</sp
     "Vérification à l'outil memtool sur l'adresse 0x30000000, et fermeture des ponts HPS vers FPGA avant reprogrammation pour éviter les gels de carte."
   ],
   chiffres:[
-    {v:'256 Mo',l:'réservés au FPGA'},
-    {v:'768 Mo',l:'laissés à Linux'},
-    {v:'0x30000000',l:'base vidéo DDR3'},
-    {v:'50 MHz',l:'horloge du bus Avalon'}
+    {v:'VHDL',l:'capture et mise en mémoire'},
+    {v:'Cyclone V',l:'SoC FPGA + Linux'},
+    {v:'256 Mo',l:'mémoire réservée au FPGA'},
+    {v:'DMA',l:'transfert sans le processeur'}
   ],
   html:`
     <h4>Flux de données</h4>
@@ -1045,7 +1006,7 @@ Point P2 = sol(<span class="nb">-0.55f</span> + delta*<span class="nb">0.90f</sp
       <path class="fil" d="M82 57h56"/>
       <circle class="paquet p1" cx="88" cy="57" r="2.6"/>
       <circle class="paquet p2" cx="88" cy="57" r="2.6"/>
-      <rect class="bloc" x="138" y="20" width="150" height="74" rx="7" stroke="rgba(100,255,218,.4)"/>
+      <rect class="bloc" x="138" y="20" width="150" height="74" rx="7" stroke="rgba(15,76,129,.4)"/>
       <text class="txt" x="213" y="35" text-anchor="middle" fill="#64FFDA">FPGA</text>
       <rect class="bloc" x="150" y="44" width="58" height="36" rx="5"/>
       <text class="txt pt" x="179" y="60" text-anchor="middle">FIFO</text>
@@ -1086,20 +1047,20 @@ SOCFPGA_CYCLONE5 # <span class="kw">reset</span>
   titre:'Vision par ordinateur sans réseau de neurones',
   sous:'Classification de formes par moments d\'image sur Raspberry Pi',
   desc:"Discrimination automatique de jetons par calcul mathématique explicite : moments d'image, ellipse d'inertie, arbre de décision, validation statistique.",
-  mots:['Python','NumPy','picamera2','Moments','Matrice de confusion','ROC'],
+  mots:['Python','NumPy','picamera2','Traitement d’image','Mesure'],
   contexte:"Cours d'intelligence artificielle pour les systèmes embarqués. Le parti pris était de résoudre une classification sans réseau de neurones, avec des descripteurs que nous définissons et savons expliquer.",
   points:[
     "Chaîne complète : acquisition picamera2, recadrage sur la zone d'intérêt, niveaux de gris, binarisation en seuillage inverse pour isoler l'objet du fond.",
     "Extraction géométrique par les moments d'image : moments centrés d'ordre 2, matrice de covariance, diagonalisation, puis longueur et largeur de l'ellipse d'inertie équivalente.",
     "Classification par arbre de décision sur le ratio d'allongement L sur W, puis sur la longueur, en trois classes : rond, rectangle court, rectangle long.",
     "Problème résolu : dépassement de capacité sur le calcul de M20, les images étant stockées en entiers 8 bits. Conversion forcée en float64 avant calcul.",
-    "Seuil de décision optimisé par courbe ROC : le script balaie les seuils de ratio de 1,0 à 2,0 et retient le meilleur compromis au lieu d'une valeur choisie à l'estime."
+    "Seuil de décision réglé par la mesure : le script balaie les valeurs de ratio de 1,0 à 2,0 et retient celle qui sépare le mieux les classes, au lieu d'une valeur choisie à l'estime."
   ],
   chiffres:[
-    {v:'94,07 %',l:'exactitude sur 135 essais'},
-    {v:'0,94',l:'F1-Score macro'},
-    {v:'0,94',l:'précision moyenne'},
-    {v:'3',l:'classes discriminées'}
+    {v:'135',l:'essais mesurés'},
+    {v:'94 %',l:'classifications correctes'},
+    {v:'3',l:'formes discriminées'},
+    {v:'0',l:'réseau de neurones'}
   ],
   html:`
     <h4>Matrice de confusion, 135 essais</h4>
@@ -1138,8 +1099,8 @@ ratio = L / W                    <span class="cm"># 1.0 pour un cercle parfait</
   chiffres:[
     {v:'1re',l:'place nationale'},
     {v:'5',l:'cartes microcontrôleurs'},
-    {v:'100/s',l:'échantillons au banc'},
-    {v:'2',l:'couches de routage'}
+    {v:'LiDAR',l:'banc de test automatisé'},
+    {v:'KiCad',l:'carte moteur simple face'}
   ],
   html:`
     <div class="duo" style="margin-top:6px">`+PH('Robot et balise en configuration de match','robot-match')+PH('Schéma et routage KiCad de la carte moteur','robot-kicad')+`</div>
@@ -1240,7 +1201,7 @@ function ouvrirProjet(id){
   dernierFocus = document.activeElement;
   fiche.innerHTML = `
     <div class="fiche-tete">
-      <span class="ic" style="width:44px;height:44px;border-radius:11px;display:grid;place-items:center;background:rgba(100,255,218,.09);color:var(--cyan);flex:none">${ICONES[p.ic]}</span>
+      <span class="ic" style="width:44px;height:44px;border-radius:11px;display:grid;place-items:center;background:rgba(15,76,129,.09);color:var(--cyan);flex:none">${ICONES[p.ic]}</span>
       <div>
         <h3 id="fiche-titre">${p.titre}</h3>
         <p class="muted" style="margin:4px 0 0;font-size:.92rem">${p.sous}</p>
@@ -1421,7 +1382,7 @@ sections.forEach(s=>ioNav.observe(s));
   const slider = document.getElementById('braquage');
 
   let W = 800, H = 500;
-  const etat = { angle:0, cible:0, vitesse:0, fps:15, t:0 };
+  const etat = { angle:0, cible:0, vitesse:0, fps:0, t:0, _n:0, _t0:0 };
 
   // places detectees, coordonnees au sol : x lateral, z profondeur
   const places = [
@@ -1458,7 +1419,7 @@ sections.forEach(s=>ioNav.observe(s));
     g.addColorStop(.31,'#6a6a68'); g.addColorStop(1,'#9a9791');
     ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
     // lignes de fuite du sol
-    ctx.strokeStyle = 'rgba(255,255,255,.06)'; ctx.lineWidth = 1;
+    ctx.strokeStyle = 'rgba(20,28,40,.05)'; ctx.lineWidth = 1;
     for(let i=-6;i<=6;i++){
       const a = sol(i*0.9, 0.02), b = sol(i*0.9, 3.4);
       ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
@@ -1521,9 +1482,9 @@ sections.forEach(s=>ioNav.observe(s));
   }
 
   function overlay(){
-    ctx.fillStyle = 'rgba(10,16,28,.62)'; ctx.fillRect(0,0,W,30);
+    ctx.fillStyle = 'rgba(255,255,255,.62)'; ctx.fillRect(0,0,W,30);
     ctx.font = '600 13px "JetBrains Mono", monospace';
-    ctx.fillStyle = '#ffffff'; ctx.fillText('FPS: '+etat.fps, 12, 20);
+    ctx.fillStyle = '#ffffff'; ctx.fillText(etat.fps ? 'FPS: '+etat.fps : 'FPS: --', 12, 20);
     ctx.fillStyle = '#3ddc84'; ctx.fillText('VID: OK', 100, 20);
     ctx.fillText('CMD: OK', 176, 20);
     const mot = etat.vitesse>0.05 ? 'AVANT' : etat.vitesse<-0.05 ? 'RECUL' : 'STOP';
@@ -1532,7 +1493,7 @@ sections.forEach(s=>ioNav.observe(s));
     ctx.fillText(mot+'   '+Math.round(Math.abs(etat.vitesse)*100)+'%', W-12, 20);
     ctx.textAlign = 'left';
 
-    ctx.fillStyle = 'rgba(10,16,28,.62)'; ctx.fillRect(0,H-28,W,28);
+    ctx.fillStyle = 'rgba(255,255,255,.62)'; ctx.fillRect(0,H-28,W,28);
     ctx.font = '600 12px "JetBrains Mono", monospace';
     ctx.fillStyle = '#7fe3ff'; ctx.fillText('PLACES: '+places.length, 12, H-10);
     ctx.fillStyle = '#ffa41b';
@@ -1550,7 +1511,14 @@ sections.forEach(s=>ioNav.observe(s));
   function boucle(){
     etat.t++;
     etat.angle += (etat.cible - etat.angle)*0.10;
-    if(etat.t%18===0) etat.fps = 14 + (Math.random()<.5?0:1);
+    // FPS reellement mesure, pas simule
+    etat._n++;
+    const _now = performance.now();
+    if(!etat._t0) etat._t0 = _now;
+    if(_now - etat._t0 >= 1000){
+      etat.fps = Math.round(etat._n * 1000 / (_now - etat._t0));
+      etat._n = 0; etat._t0 = _now;
+    }
     if(Math.abs(etat.vitesse)>0.02){
       places.forEach(p=>{
         p.z += etat.vitesse*0.006;
