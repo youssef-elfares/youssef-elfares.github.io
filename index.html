@@ -957,15 +957,17 @@ const ICONES = {
 
 const PH = (t, f) => '<figure class="ph"><img data-ph="'+f+'" src="img/'+f+'.jpg" alt="'+t+'" loading="lazy"><figcaption>'+t+'</figcaption></figure>';
 
-/* Si img/<nom>.jpg n existe pas, on tente le .png, puis on affiche un cadre
-   en pointilles rappelant le nom de fichier attendu. */
+/* On essaie toutes les extensions courantes, majuscules comprises, car
+   GitHub Pages distingue la casse. Si aucune ne repond, on affiche un
+   cadre en pointilles rappelant le nom de fichier attendu. */
+const EXT = ['.jpg','.JPG','.jpeg','.JPEG','.png','.PNG','.webp','.WEBP'];
 function photos(zone){
   zone.querySelectorAll('img[data-ph]').forEach(im=>{
     const nom = im.dataset.ph;
-    let essai = 0;
+    let i = 0;
     const rate = () => {
-      essai++;
-      if(essai===1){ im.src = 'img/'+nom+'.png'; return; }
+      i++;
+      if(i < EXT.length){ im.src = 'img/'+nom+EXT[i]; return; }
       im.outerHTML = '<div class="ph-box"><span>PHOTO MANQUANTE<br>déposer img/'+nom+'.jpg</span></div>';
     };
     im.addEventListener('error', rate);
